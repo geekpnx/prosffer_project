@@ -10,7 +10,7 @@ class Product(models.Model):
     category = models.CharField(max_length=100, null=True, blank=True)
     image = models.URLField(max_length=255)
     link = models.URLField(max_length=255)
-    id_tag = models.UUIDField()
+    id_tag = models.CharField(max_length=50, null=True, blank=True) # CharField (encrypt decrypt)
 
     def __str__(self) -> str:
         return f"Store: {self.store}, Product: {self.name}, Price: {self.price}{self.currency}"
