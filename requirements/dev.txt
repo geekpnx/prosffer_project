@@ -11,3 +11,4 @@ pillow==10.4.0
 beautifulsoup4==4.12.3
 selenium==4.24.0
 pandas==2.2.2
+Scrapy==2.11.2
