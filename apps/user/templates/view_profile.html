@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}View Profile{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{{ user.first_name }}'s Profile</h1>
+    </header>
+
+    <section>
+        <h3>Account Information</h3>
+        <p>Username: {{ user.username }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+
+        <h3>Profile Information</h3>
+        {% if consumer %}
+            {% if consumer.profile_image %}
+                <img src="{{ consumer.profile_image.url }}" alt="Profile Image" style="max-width: 200px;">
+            {% else %}
+                <p>No profile image uploaded.</p>
+            {% endif %}
+        {% else %}
+            <p>No additional profile information available.</p>
+        {% endif %}
+        
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+    </section>
+{% endblock %}
+

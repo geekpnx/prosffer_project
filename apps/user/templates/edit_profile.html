@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Edit Your Profile</h1>
+    </header>
+
+    <section>
+        <!-- Display success/error messages if any -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Display profile image if it exists -->
+        {% if profile_form.instance.profile_image %}
+            <img src="{{ profile_form.instance.profile_image.url }}" alt="Profile Image" style="max-width: 200px;">
+        {% else %}
+            <p>No profile image uploaded.</p>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h3>Account Information</h3>
+            {{ user_form.as_p }} 
+
+            <h3>Profile Information</h3>
+            {{ profile_form.as_p }} 
+
+            <button type="submit">Save changes</button>
+        </form>
+    </section>
+{% endblock %}
