@@ -1,0 +1,118 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8; /* Light background for the header */
+}
+
+.logo img {
+    height: 50px; /* Adjust height of the logo */
+}
+
+.auth-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+/* Search container styles */
+.search-container {
+    text-align: center;
+    margin: 40px 0; /* Spacing above and below */
+}
+
+.search-container form {
+    display: inline-block; /* Center the form */
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px; /* Set a width for the search input */
+    margin-right: 10px; /* Space between input and button */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Product comparison styles */
+h2 {
+    text-align: center;
+}
+
+.product-comparison {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    justify-content: center; /* Center the items */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+}
+
+.product-card {
+    background-color: #ffffff; /* Card background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px;
+    width: 300px; /* Set a fixed width for cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.2s; /* Animation effect */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.product-details {
+    margin-top: 10px;
+}
+
+.product-item {
+    border-bottom: 1px solid #ddd; /* Divider for items */
+    padding: 10px 0; /* Spacing around items */
+}
+
+.product-item:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #28a745; /* Green background */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px; /* Rounded button */
+}
+
+.buy-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.suggestions {
+    margin-top: 10px; /* Space above suggestions */
+    padding: 0; /* Remove default padding */
+    list-style-type: none; /* Remove bullet points */
+}
+
+.suggestions p {
+    margin: 0; /* Remove default margin for paragraphs */
+    padding: 5px 0; /* Add some vertical spacing */
+    color: #333; /* Text color */
+}

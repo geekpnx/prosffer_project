@@ -156,3 +156,26 @@ make
 ```
 
 Check if your Django server is up and running, by going to your browser, and enter **http://127.0.0.1:8000**
+
+
+# **Insert Data to Database `prosffer_db`**
+
+
+First you need to run the  `dbshell` from the `prosffer_project` directory *(or the working directory)*
+
+- With the command
+
+```bash
+make db-shell
+```
+
+
+
+```sql
+
+COPY product_product (store, name, description, price, currency, category, image, link, id_tag)
+FROM 'absolute/drinks.csv'
+DELIMITER ','
+CSV HEADER;
+
+```
