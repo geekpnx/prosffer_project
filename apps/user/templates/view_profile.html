@@ -16,6 +16,10 @@
         <p>Email: {{ user.email }}</p>
 
         <h3>Profile Information</h3>
+
+        <p>Date of birth: {{ consumer.date_of_birth }}</p>
+        <p>Phone number: {{ consumer.phone_number }}</p>
+        <p>Address: {{ consumer.address }}</p>
         {% if consumer %}
             {% if consumer.profile_image %}
                 <img src="{{ consumer.profile_image.url }}" alt="Profile Image" style="max-width: 200px;">
@@ -26,7 +30,12 @@
             <p>No additional profile information available.</p>
         {% endif %}
         
-        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+        <div style="margin-top: 20px; padding-bottom: 50px;">
+
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+            <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+        </div>
     </section>
 {% endblock %}
 

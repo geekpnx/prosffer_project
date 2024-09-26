@@ -9,14 +9,14 @@
     </header>
 
     <section>
-        <!-- Display success/error messages if any -->
+        {% comment %} <!-- Display success/error messages if any -->
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
                     <li class="{{ message.tags }}">{{ message }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <!-- Display profile image if it exists -->
         {% if profile_form.instance.profile_image %}
