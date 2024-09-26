@@ -1,8 +1,19 @@
 /* General styles */
+@font-face {
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(https://design.penpot.app/internal/gfonts/font/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Abel';
     margin: 0;
     padding: 0;
+    background-color: #dcdcdc;
 }
 
 /* Header styles */
@@ -10,46 +21,70 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #f8f8f8; /* Light background for the header */
+    padding: 4px;
 }
 
 .logo img {
-    height: 50px; /* Adjust height of the logo */
+    margin-top: 20px;
+    margin-left: 70px;
+    height: 40px; /* Adjust height of the logo */
 }
 
 .auth-links a {
-    margin-left: 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    margin: 20px 70px 10px -50px;
     text-decoration: none;
     color: #333;
 }
 
 /* Search container styles */
 .search-container {
+    position: relative;
     text-align: center;
     margin: 40px 0; /* Spacing above and below */
 }
 
-.search-container form {
+.search-container input[type="text"] {
+    font-family: 'Abel';
+    font-size: 18px;
     display: inline-block; /* Center the form */
+    padding: 10px 10px 10px 20px;
+    margin-right: -3%; /* Space between input and button */
+    border-radius: 25px; /* Make input round */
+    height: 30px; /* Adjusted height for better alignment */
+    width: 500px; /* Width of the input */
+    outline: none;
+    border: none; /* Remove any borders */
+    border: 3px solid #ccc;
 }
 
-input[type="text"] {
-    padding: 10px;
-    width: 300px; /* Set a width for the search input */
-    margin-right: 10px; /* Space between input and button */
+.search-container input[type="text"]:focus {
+    outline: none;
+    box-shadow: none; /* Remove focus box-shadow if present */
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007BFF; /* Bootstrap primary color */
-    color: white;
+.search-container button[type="submit"] {
+    background-color: #e83a68; /* Bootstrap primary color */
     border: none;
     cursor: pointer;
+    border: none;
+    border-radius: 55%;
+    transform: translateY(14%) translate(1%);
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    width: 52px;
+
 }
 
-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.search-container button[type="submit"]:hover {
+    background-color: #d14160; /* Darker blue on hover */
+}
+
+.search-container button[type="submit"] img {
+    width: 30px; /* Size of the looper image */
+    height: 30px;
 }
 
 /* Product comparison styles */
@@ -95,24 +130,54 @@ h2 {
 .buy-button {
     display: inline-block;
     padding: 8px 12px;
-    background-color: #28a745; /* Green background */
+    background-color: #59c6ac; /* Green background */
     color: white;
     text-decoration: none;
     border-radius: 4px; /* Rounded button */
 }
 
 .buy-button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #4db59c; /* Darker green on hover */
 }
 
+/* Ensuring the search container is positioned correctly */
+.search-container {
+    position: relative; /* This makes the container the positioning context for absolute children */
+    text-align: center;
+    margin: 40px 0; /* Spacing above and below */
+}
+
+/* Suggestions dropdown styles */
 .suggestions {
-    margin-top: 10px; /* Space above suggestions */
+    position: absolute; /* Floats above content */
+    background-color: #ffffff; /* White background for suggestions */
+    width: 450px; /* Match the input width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); /* Drop shadow for card effect */
+    z-index: 1000; /* Ensure it appears on top of other content */
+    max-height: 200px; /* Limit height */
+    overflow-y: auto; /* Scroll if content overflows */
+    margin-top: 5px; /* Space between input and suggestions */
     padding: 0; /* Remove default padding */
-    list-style-type: none; /* Remove bullet points */
+    display: none; /* Hide by default, shown on input */
+    left: 48.5%;
+    transform: translateX(-50%); /* Center align the suggestions */
 }
 
+/* Style for each suggestion item */
 .suggestions p {
-    margin: 0; /* Remove default margin for paragraphs */
-    padding: 5px 0; /* Add some vertical spacing */
+    margin: 0; /* Remove default margin */
+    padding: 10px; /* Add padding inside the suggestions */
+    cursor: pointer; /* Make it clickable */
     color: #333; /* Text color */
+    text-align: left; /* Align text to the left */
+}
+
+.suggestions p:hover {
+    background-color: #f1f1f1; /* Light background on hover */
+}
+
+/* Ensure the product card is not affected */
+.product-comparison {
+    margin-top: 50px; /* Add margin so it doesn't get too close to the search bar */
 }

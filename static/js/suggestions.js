@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const query = searchInput.value;
 
         if (query.length < 1) {
-            suggestionsList.innerHTML = '';  // Clear suggestions if input is empty
+            suggestionsList.style.display = 'none'; // Hide suggestions when input is empty
+            suggestionsList.innerHTML = ''; // Clear suggestions
             return;
         }
 
@@ -19,18 +20,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 const uniqueNames = new Set(data);
 
                 uniqueNames.forEach(productName => {
-                    const li = document.createElement('li');
-                    li.textContent = productName;
+                    const p = document.createElement('p');
+                    p.textContent = productName;
 
                     // Add click event to select the suggestion
-                    li.addEventListener('click', function() {
+                    p.addEventListener('click', function() {
                         searchInput.value = productName;  // Set the input value to the selected suggestion
                         suggestionsList.innerHTML = '';  // Clear the suggestions after selection
+                        suggestionsList.style.display = 'none'; // Hide suggestions box
                     });
 
-                    suggestionsList.appendChild(li);
+                    suggestionsList.appendChild(p);
                 });
+
+                // Show suggestions box when there are results
+                if (uniqueNames.size > 0) {
+                    suggestionsList.style.display = 'block';
+                } else {
+                    suggestionsList.style.display = 'none';
+                }
             })
             .catch(error => console.error('Error:', error));
+    });
+
+    // Hide the suggestions when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!searchInput.contains(event.target) && !suggestionsList.contains(event.target)) {
+            suggestionsList.style.display = 'none';
+        }
     });
 });

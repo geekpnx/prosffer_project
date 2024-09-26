@@ -15,7 +15,7 @@
     <!-- Header Section -->
     <header>
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" />
+            <img src="{% static 'images/logo/Prosffer-Logo.svg' %}" alt="Logo" />
         </div>
         <div class="auth-links">
             <a href="/login">Login</a>
@@ -26,12 +26,11 @@
     <!-- Search Section -->
     <div class="search-container">
         <form method="GET" action="">
-            <label for="product_name">Search by Product Name:</label>
-            <input type="text" id="product-search" name="product_name" placeholder="Enter product name" value="{{ request.GET.product_name }}"  autocomplete="off">
-            <button type="submit">Search</button>
+            <input type="text" id="product-search" name="product_name" placeholder="Compare Product Prices" value="{{ request.GET.product_name }}" autocomplete="off">
+            <button type="submit"><img src="{% static 'images/icons/looper-white.svg' %}" alt="Search"></button>
         </form>
-         <div id="suggestions" class="suggestions">
-        <!-- Here, you can display suggestions as paragraphs if you have them in your context. -->
+        <div id="suggestions" class="suggestions">
+            <!-- Here, you can display suggestions as paragraphs if you have them in your context. -->
             {% for suggestion in suggestions %}
                 <p>{{ suggestion }}</p>
             {% endfor %}
@@ -58,12 +57,12 @@
             {% endfor %}
         </div>
     {% else %}
-        <p>No products found.</p>
+        <p class="no-products"></p>
     {% endif %}
 
     <!-- External JS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/autocomplete.js' %}"></script>    
+    <script src="{% static 'js/suggestions.js' %}"></script>    
 
 </body>
 </html>
