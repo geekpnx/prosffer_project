@@ -40,50 +40,47 @@ header {
 
 /* Search container styles */
 .search-container {
-    position: relative;
-    text-align: center;
-    margin: 40px 0; /* Spacing above and below */
+    display: flex; /* Use flexbox to align input and button */
+    justify-content: center; /* Center the container */
+    margin: 40px 0;
+}
+
+.search-container form {
+    display: flex; /* Align input and button in a single line */
+    width: 100%; /* Ensure form takes full width */
+    max-width: 600px; /* Set a max width to prevent it from stretching too much */
 }
 
 .search-container input[type="text"] {
+    flex: 1; /* Input will take the remaining space */
     font-family: 'Abel';
     font-size: 18px;
-    display: inline-block; /* Center the form */
-    padding: 10px 10px 10px 20px;
-    margin-right: -3%; /* Space between input and button */
-    border-radius: 25px; /* Make input round */
-    height: 30px; /* Adjusted height for better alignment */
-    width: 500px; /* Width of the input */
-    outline: none;
-    border: none; /* Remove any borders */
+    padding: 10px 20px;
+    border-radius: 25px 0 0 25px; /* Rounded corners on the left */
     border: 3px solid #ccc;
-}
-
-.search-container input[type="text"]:focus {
     outline: none;
-    box-shadow: none; /* Remove focus box-shadow if present */
+    height: 52%; /* Adjust the height */
+    width: 100%; /* Set width to 100% for responsiveness */
 }
 
 .search-container button[type="submit"] {
-    background-color: #e83a68; /* Bootstrap primary color */
+    background-color: #e83a68;
     border: none;
     cursor: pointer;
-    border: none;
-    border-radius: 55%;
-    transform: translateY(14%) translate(1%);
+    border-radius: 0 25px 25px 0; /* Rounded corners on the right */
+    height: 52px; /* Same height as input */
+    width: 52px; /* Fixed width for the button */
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 52px;
-    width: 52px;
-
 }
 
 .search-container button[type="submit"]:hover {
-    background-color: #d14160; /* Darker blue on hover */
+    background-color: #d14160;
 }
 
 .search-container button[type="submit"] img {
-    width: 30px; /* Size of the looper image */
+    width: 30px;
     height: 30px;
 }
 
