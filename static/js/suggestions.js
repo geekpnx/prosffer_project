@@ -2,6 +2,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById('product-search');
     const suggestionsList = document.getElementById('suggestions');
 
+    // Function to match suggestions width with input width
+    function adjustSuggestionsWidth() {
+        const inputWidth = searchInput.offsetWidth;
+        suggestionsList.style.width = inputWidth + "px";
+    }
+
+    // Adjust on page load
+    adjustSuggestionsWidth();
+
+    // Adjust on window resize
+    window.addEventListener("resize", function() {
+        adjustSuggestionsWidth();
+    });
+
     searchInput.addEventListener('input', function() {
         const query = searchInput.value;
 
@@ -39,6 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     suggestionsList.style.display = 'none';
                 }
+
+                // Adjust the width of suggestions after adding suggestions
+                adjustSuggestionsWidth();
             })
             .catch(error => console.error('Error:', error));
     });

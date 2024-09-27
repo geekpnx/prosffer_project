@@ -84,7 +84,58 @@ header {
     height: 30px;
 }
 
-/* Product comparison styles */
+
+/* Ensure the search-container is relatively positioned */
+.search-container {
+    position: relative; /* This is key for the suggestions to be positioned correctly */
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.search-container form {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    position: relative; /* This keeps the suggestions under the input */
+}
+
+/* Suggestions dropdown styles */
+.suggestions {
+    flex: 1;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 5px; /* No extra margin */
+    padding: 0;
+    display: none; /* Hidden by default */
+    top: 52px; /* Distance below input (adjust based on input height) */
+    left: 50%; /* Center the suggestions container relative to the form */
+    transform: translateX(-50%); /* Shift it left by 50% to center-align */
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    min-width: 550px; 
+}
+
+/* Style for each suggestion item */
+.suggestions p {
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+    color: #333;
+    text-align: left;
+}
+
+.suggestions p:hover {
+    background-color: #ececec;
+}
+
+
+
+/* ------------ Product comparison styles ---------------------- */
 h2 {
     text-align: center;
 }
@@ -137,42 +188,6 @@ h2 {
     background-color: #4db59c; /* Darker green on hover */
 }
 
-/* Ensuring the search container is positioned correctly */
-.search-container {
-    position: relative; /* This makes the container the positioning context for absolute children */
-    text-align: center;
-    margin: 40px 0; /* Spacing above and below */
-}
-
-/* Suggestions dropdown styles */
-.suggestions {
-    position: absolute; /* Floats above content */
-    background-color: #ffffff; /* White background for suggestions */
-    width: 450px; /* Match the input width */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); /* Drop shadow for card effect */
-    z-index: 1000; /* Ensure it appears on top of other content */
-    max-height: 200px; /* Limit height */
-    overflow-y: auto; /* Scroll if content overflows */
-    margin-top: 5px; /* Space between input and suggestions */
-    padding: 0; /* Remove default padding */
-    display: none; /* Hide by default, shown on input */
-    left: 48.5%;
-    transform: translateX(-50%); /* Center align the suggestions */
-}
-
-/* Style for each suggestion item */
-.suggestions p {
-    margin: 0; /* Remove default margin */
-    padding: 10px; /* Add padding inside the suggestions */
-    cursor: pointer; /* Make it clickable */
-    color: #333; /* Text color */
-    text-align: left; /* Align text to the left */
-}
-
-.suggestions p:hover {
-    background-color: #f1f1f1; /* Light background on hover */
-}
 
 /* Ensure the product card is not affected */
 .product-comparison {
