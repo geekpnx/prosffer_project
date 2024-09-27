@@ -2,32 +2,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PROSOFER{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
-
 <body>
-    <header>
-        <h1>Welcome to Prosffer</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header> 
+  <div class="hero">
+    <nav>
+        <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        </ul>
+        <img src="{% static 'images/icons/user.png' %}" class="user-pic" onclick="toggleMenu()" alt="User Pic">
+        <div class="sub-menu-wrap" id="subMenu">
+          <div class="sub-menu">
+            <div class="user-info">
+              <img src="{% static 'images/icons/user.png' %}" alt="User Info">
+              <h3>Achraf Ben Mekki</h3>
+            </div>
+            <hr>
+            <a href="{% url 'edit_profile' %}" class="sub-menu-link">
+              <img src="{% static 'images/icons/profile.png' %}" alt="Profile">
+              <p>Edit Profile</p>
+              <span>></span>
+            </a>
+            <a href="" class="sub-menu-link">
+              <img src="{% static 'images/icons/setting.png' %}" alt="Settings">
+              <p>Settings & Privacy</p>
+              <span>></span>
+            </a>
+            <a href="" class="sub-menu-link">
+              <img src="{% static 'images/icons/help.png' %}" alt="Help">
+              <p>Help & Support</p>
+              <span>></span>
+            </a>
+            <a href="" class="sub-menu-link">
+              <img src="{% static 'images/icons/logout.png' %}" alt="Logout">
+              <p>Logout</p>
+              <span>></span>
+            </a>
+          </div>
+        </div>
+    </nav>
+      <main>
+      {% block content %}
+      <h2>Hello and Welcome to Prosoffer</h2>
+      <p>We will guide you to every store you would like to visit.</p>
+      Home page: to be reviewed
+      {% endblock %}
+  </main>
+  </div>
+  <footer>
+      <p>&copy; 2024 Prosffer</p>
+  </footer>
+  <script>
+    let subMenu = document.getElementById("subMenu");
+    function toggleMenu(){
+      subMenu.classList.toggle("open-menu");
+    }
+  </script>
 
-    <main>
-        {% block content %}
-        User interface : to be reviewed
-        {% endblock %}
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Prosffer</p>
-    </footer>
 </body>
 </html>
