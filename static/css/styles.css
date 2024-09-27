@@ -27,7 +27,7 @@ header {
 .logo img {
     margin-top: 20px;
     margin-left: 70px;
-    height: 40px; /* Adjust height of the logo */
+    height: 45px; /* Adjust height of the logo */
 }
 
 .auth-links a {
@@ -130,7 +130,7 @@ h2 {
 .buy-button {
     display: inline-block;
     padding: 8px 12px;
-    background-color: #59c6ac; /* Green background */
+    background-color: #389e86; /* Green background */
     color: white;
     text-decoration: none;
     border-radius: 4px; /* Rounded button */
@@ -180,4 +180,79 @@ h2 {
 /* Ensure the product card is not affected */
 .product-comparison {
     margin-top: 50px; /* Add margin so it doesn't get too close to the search bar */
+}
+
+
+
+/* ------------- User menu -------------  */
+
+/* Style for the user menu and button */
+.user-menu {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+}
+
+/* The button that wraps the user icon */
+.user-icon-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 20px;
+    margin-left: -110px; /* Negative value to move it left */
+    width: 40px; /* Match icon's width */
+    height: 40px; /* Match icon's height */
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+/* Ensure the icon fits perfectly inside the button */
+.user-icon {
+    width: 100%;  /* 100% of the button's width */
+    height: 100%; /* 100% of the button's height */
+    display: block; /* Ensure it's treated as a block element */
+}
+
+/* ---------------- Drop Down User menu ------------- */
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none; /* Hidden initially */
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px; /* Optional: give it a card-like view */
+    overflow: hidden;
+    padding: 0px;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover {
+    background-color: #e83a68;
+    color: white;
+    text-decoration-color: #ccc;
+}
+
+/* Show the dropdown when the .show class is added */
+.show {
+    display: block;
 }
