@@ -67,7 +67,9 @@
 
     <!-- Show comparison results -->
     {% if comparison_dict %}
-        <h2>Proactively Surff Offers</h2>
+        {% comment %} <div class="slogan"> {% endcomment %}
+        <h2>Proactively Surf Offers</h2>
+        </div>
         <div class="product-comparison">
             {% for product_name, product_list in comparison_dict.items %}
                 <div class="product-card">
@@ -101,8 +103,8 @@
 
     <!-- External JS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/suggestions.js' %}"></script>  
-    <script src="{% static 'js/user_drop_down.js' %}"></script>
-    <script src="{% static 'js/wishlist.js' %}"></script> <!-- Wishlist functionality -->
+    <script src="{% static 'js/suggestions_functions.js' %}"></script>  
+    <script src="{% static 'js/user_wishlist_button_functions.js' %}"></script>
+    <script src="{% static 'js/wishlist_dropdown_functions.js' %}"></script> <!-- Wishlist functionality -->
 </body>
 </html>

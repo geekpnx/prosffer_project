@@ -25,7 +25,7 @@ header {
 }
 
 .logo img {
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 70px;
     height: 45px; /* Adjust height of the logo */
 }
@@ -140,6 +140,10 @@ header {
 /* ------------ Product comparison styles ---------------------- */
 h2 {
     text-align: center;
+    color:#515151;
+    font-weight:bold;
+    font-size: 250%;
+
 }
 
 .product-comparison {
@@ -200,11 +204,11 @@ h2 {
 }
 
 .view-button {
-    width: 37px;
-    height: 37px;
+    width: 35px;
+    height: 35px;
     display: inline-block;
     position: relative;
-    top: 0px; /* Adjust value as needed to push it up */
+    top: -1px; /* Adjust value as needed to push it up */
     left: 5px;
 }
 
@@ -225,27 +229,12 @@ h2 {
     margin-left: auto; /* Keeps it on the right side of the header */
 }
 
-
-/* The button that wraps the user icon */
-.user-icon-btn {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin-top: 35px;
-    margin-left: -110px; /* Negative value to move it left */
-    width: 40px; /* Match icon's width */
-    height: 40px; /* Match icon's height */
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
+.icons-container {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Vertically align items */
+    gap: 10px; /* Space between the user and wishlist icons */
 }
 
-/* Ensure the icon fits perfectly inside the button */
-.user-icon {
-    width: 100%;  /* 100% of the button's width */
-    height: 100%; /* 100% of the button's height */
-    display: block; /* Ensure it's treated as a block element */
-}
 
 
 
@@ -261,12 +250,14 @@ h2 {
 
 
 #total-price {
-    margin-top: 20px;
-    margin-left: -20px; /* Space between the icon and the price */
+    position: absolute; /* Fix position relative to the wishlist icon */
+    margin-top: 60px;
+    margin-left: -5px; /* Space between the icon and the price */
     font-size: 15px; /* Adjust as needed */
     color: #333; /* Adjust color as needed */
-    vertical-align: middle; /* Align the text with the icon */
     font-weight: bold; /* Make the text bold */
+    white-space: nowrap; /* Prevent line breaks */
+    display: inline; /* Just use inline to ensure it behaves like regular text */
 }
 
 .wishlist-dropdown .user-icon-btn {
@@ -275,10 +266,13 @@ h2 {
 }
 
 .wishlist-icon-btn {
-    width: 70px;  /* Adjust width as needed */
-    height: 70px; /* Adjust height as needed */
+    width: 100%;  /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
     padding: 0;   /* Remove padding if any */
     margin-top: 0; /* Adjust if necessary */
+    display: inline-flex; /* Align using flexbox */
+    align-items: center; /* Vertically center the icon */
+    justify-content: center; /* Horizontally center the icon */
     
 }
 
@@ -302,10 +296,26 @@ h2 {
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 15px; /* Adjust padding as needed to move text inside */
 }
 
+
+.wishlist-content p {
+    font-weight: bold;
+    background-color: #414141;
+    background-size: 30px;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 30px;
+}
+
+.wishlist-content h4 {
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(52, 51, 51);
+    padding: 5px 20px;
+}
 
 #wishlist-items {
     list-style: none; /* Remove bullets */
@@ -354,11 +364,6 @@ h2 {
     text-decoration: underline; /* Underline on hover */
 }
 
-/* Total Price Display */
-#wishlist-content p {
-    margin: 10px; /* Margin for spacing */
-    font-weight: bold; /* Bold for emphasis */
-}
 
 /* Style for the Add to Wishlist button in product cards */
 .add-to-wishlist {
@@ -382,6 +387,30 @@ h2 {
     padding: 1px;
     cursor: pointer;
 }
+
+
+/* The button that wraps the user icon */
+.user-icon-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 20px;
+    margin-left: -100px; /* Negative value to move it left */
+    width: 50px; /* Match icon's width */
+    height: 50px; /* Match icon's height */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center; /* Vertically center the icon */
+    justify-content: center; /* Horizontally center the icon */
+}
+
+/* Ensure the icon fits perfectly inside the button */
+.user-icon {
+    width: 70%;  /* 100% of the button's width */
+    height: 70%; /* 100% of the button's height */
+    display: block; /* Ensure it's treated as a block element */
+}
+
 /* ---------------- Drop Down User menu ------------- */
 
 /* Dropdown container */
@@ -390,8 +419,12 @@ h2 {
     display: inline-block;
 }
 
+
 /* Dropdown content (hidden by default) */
 .dropdown-content {
+    font-family: "Abel";
+    font-weight: normal;
+    font-size: 18px;
     display: none; /* Hidden initially */
     position: absolute;
     right: 0;
@@ -401,6 +434,7 @@ h2 {
     z-index: 1;
     border-radius: 8px; /* Optional: give it a card-like view */
     overflow: hidden;
+    margin-top: 20px;
     padding: 0px;
 }
 
@@ -460,5 +494,4 @@ h2 {
 .buy-button, .add-to-wishlist {
     margin-top: 10px;
 }
-
 
