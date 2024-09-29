@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Comparison</title>
+    <title>prosffer</title>
 
     <!-- External CSS file -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -35,6 +35,20 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- Wishlist Dropdown -->
+            <div class="wishlist-dropdown">
+                <button id="wishlist-btn" class="user-icon-btn" >
+                    <img src="{% static 'images/icons/wishlist_icon.svg' %}" alt="Wishlist Icon" class="user-icon">
+                    <span id="total-price">0 €</span> <!-- Display total price -->
+                </button>
+                <div class="wishlist-content" id="wishlist-content">
+                    <h4>Wish List</h4>
+                    <ul id="wishlist-items">
+                        <!-- Items will be dynamically added here using JS -->
+                    </ul>
+                    <p><strong>Total Price:</strong> <span id="total-price-display">0 €</span></p>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -45,7 +59,6 @@
             <button type="submit"><img src="{% static 'images/icons/looper-white.svg' %}" alt="Search"></button>
         </form>
         <div id="suggestions" class="suggestions">
-            <!-- Here, you can display suggestions as paragraphs if you have them in your context. -->
             {% for suggestion in suggestions %}
                 <p>{{ suggestion }}</p>
             {% endfor %}
@@ -54,7 +67,7 @@
 
     <!-- Show comparison results -->
     {% if comparison_dict %}
-        <h2>Price Comparison</h2>
+        <h2>Proactively Surff Offers</h2>
         <div class="product-comparison">
             {% for product_name, product_list in comparison_dict.items %}
                 <div class="product-card">
@@ -62,9 +75,20 @@
                     <div class="product-details">
                         {% for product in product_list %}
                         <div class="product-item">
-                            <p><strong>Store:</strong> {{ product.store }}</p>
-                            <p><strong>Price:</strong> {{ product.price }} {{ product.currency }}</p>
-                            <a href="{{ product.link }}" target="_blank" class="buy-button">Buy here</a>
+                            <!-- Product Thumbnail -->
+                            <img src="{{ product.image }}" alt="{{ product_name }} thumbnail" class="product-thumbnail">
+                            
+                            <!-- Product Details -->
+                            <div class="product-details">
+                                <span class="store-name">{{ product.store }}</span>
+                                <span class="price">{{ product.price }} {{ product.currency }}</span>
+                            </div>
+                            <a href="{{ product.link }}" target="_blank" class="view-button">
+                                <img src="{% static 'images/icons/view_icon.svg' %}" alt="View Icon">
+                            </a>
+                            <button class="add-to-wishlist" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}" data-product-currency="{{ product.currency }}">
+                                <img src="{% static 'images/icons/add_icon.svg' %}" alt="Add Icon">
+                            </button>
                         </div>
                         {% endfor %}
                     </div>
@@ -78,7 +102,7 @@
     <!-- External JS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/suggestions.js' %}"></script>  
-    <script src="{% static 'js/user_drop_down.js' %}"></script>  
-
+    <script src="{% static 'js/user_drop_down.js' %}"></script>
+    <script src="{% static 'js/wishlist.js' %}"></script> <!-- Wishlist functionality -->
 </body>
 </html>

@@ -13,7 +13,7 @@ body {
     font-family: 'Abel';
     margin: 0;
     padding: 0;
-    background-color: #dcdcdc;
+    background-color: #e5e5e5;
 }
 
 /* Header styles */
@@ -131,6 +131,8 @@ header {
 
 .suggestions p:hover {
     background-color: #ececec;
+    background-color: #e83a68;
+    color: white;
 }
 
 
@@ -163,7 +165,29 @@ h2 {
 }
 
 .product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns content to the left */
     margin-top: 10px;
+    padding-left: 10px;
+}
+
+/* Store Name Styles */
+.product-details .store-name {
+    font-weight: bold;
+    font-size: 20px; /* Adjust size as needed */
+    margin-bottom: 5px;
+}
+
+/* Price Styles */
+.product-details .price {
+    background-color: #e83a68;
+    color: white;
+    padding: 5px 10px;
+    font-size: 23px; /* Adjust size as needed */
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
 }
 
 .product-item {
@@ -175,19 +199,14 @@ h2 {
     border-bottom: none; /* Remove border from last item */
 }
 
-.buy-button {
+.view-button {
+    width: 37px;
+    height: 37px;
     display: inline-block;
-    padding: 8px 12px;
-    background-color: #389e86; /* Green background */
-    color: white;
-    text-decoration: none;
-    border-radius: 4px; /* Rounded button */
+    position: relative;
+    top: 0px; /* Adjust value as needed to push it up */
+    left: 5px;
 }
-
-.buy-button:hover {
-    background-color: #4db59c; /* Darker green on hover */
-}
-
 
 /* Ensure the product card is not affected */
 .product-comparison {
@@ -201,16 +220,18 @@ h2 {
 /* Style for the user menu and button */
 .user-menu {
     position: relative;
-    display: inline-block;
-    margin-left: auto;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically in the center */
+    margin-left: auto; /* Keeps it on the right side of the header */
 }
+
 
 /* The button that wraps the user icon */
 .user-icon-btn {
     background-color: transparent;
     border: none;
     padding: 0;
-    margin-top: 20px;
+    margin-top: 35px;
     margin-left: -110px; /* Negative value to move it left */
     width: 40px; /* Match icon's width */
     height: 40px; /* Match icon's height */
@@ -226,6 +247,141 @@ h2 {
     display: block; /* Ensure it's treated as a block element */
 }
 
+
+
+/* ----------- Wish List ------------ */
+
+/* Wishlist Dropdown Styles */
+.wishlist-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Space between wishlist and user icon */
+    margin-left: -80px; /* Remove left margin to align with user icon */
+}
+
+
+#total-price {
+    margin-top: 20px;
+    margin-left: -20px; /* Space between the icon and the price */
+    font-size: 15px; /* Adjust as needed */
+    color: #333; /* Adjust color as needed */
+    vertical-align: middle; /* Align the text with the icon */
+    font-weight: bold; /* Make the text bold */
+}
+
+.wishlist-dropdown .user-icon-btn {
+    width: 48px !important;  
+    height: 48px !important; 
+}
+
+.wishlist-icon-btn {
+    width: 70px;  /* Adjust width as needed */
+    height: 70px; /* Adjust height as needed */
+    padding: 0;   /* Remove padding if any */
+    margin-top: 0; /* Adjust if necessary */
+    
+}
+
+/* Ensure the icon fits perfectly inside the button */
+.wishlist-icon-btn .user-icon {
+    width: 100%;  /* Ensure the icon takes full width */
+    height: 100%; /* Ensure the icon takes full height */
+    display: block; /* Block element */
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
+.wishlist-content {
+    font-family: 'Abel';
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 250px; /* Width of the dropdown */
+    min-height: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+    padding: 15px; /* Adjust padding as needed to move text inside */
+}
+
+
+#wishlist-items {
+    list-style: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    max-height: 300px; /* Limit height for overflow */
+    overflow-y: auto; /* Enable scrolling if necessary */
+}
+
+#wishlist-items li {
+    padding: 10px; /* Space around items */
+    border-bottom: 1px solid #ddd; /* Separator */
+    display: flex; /* Flexbox for item layout */
+    justify-content: space-between; /* Space between product details and button */
+    align-items: center; /* Center vertically */
+}
+
+#wishlist-items li:last-child {
+    border-bottom: none; /* Remove border for last item */
+}
+
+#wishlist-items li button {
+    background-color: #e83a68; /* Color for remove button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px; /* Space between product name and button */
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#wishlist-items li button:hover {
+    background-color: #d14160; /* Darker shade on hover */
+}
+
+/* Style for remove button */
+.remove-from-wishlist {
+    background: none;
+    border: none;
+    color: red; /* Red color for remove */
+    cursor: pointer;
+}
+
+/* Adjust hover effect for the remove button */
+.remove-from-wishlist:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Total Price Display */
+#wishlist-content p {
+    margin: 10px; /* Margin for spacing */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+/* Style for the Add to Wishlist button in product cards */
+.add-to-wishlist {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    padding-top: 30px;
+    box-shadow: none;
+}
+
+
+.add-to-wishlist img {
+    margin-left: 200px;
+    display: block;
+    background: none;
+    border: none;
+    width: 35px;
+    height: 35px;
+    padding: 1px;
+    cursor: pointer;
+}
 /* ---------------- Drop Down User menu ------------- */
 
 /* Dropdown container */
@@ -268,3 +424,41 @@ h2 {
 .show {
     display: block;
 }
+
+
+
+/* --------- Product card ------- */
+
+.product-item {
+    margin-bottom: 20px;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;  /* Vertically center the text with the image */
+    gap: 15px;            /* Space between the image and text */
+}
+
+.product-thumbnail {
+    width: 98%;
+    height: 98%;
+    object-fit: contain;  /* Resizes the image proportionally to fit within the container */
+    padding: 2px;  /* Optional: Adds some space inside the image container */
+    border-radius: 5px; /* Optional: Rounds the edges of the image container */
+    margin-bottom: 10px;
+    margin: 0 auto; 
+}
+
+.product-text {
+    flex-grow: 1;             /* Ensures the text block takes the available space */
+    display: flex;
+    flex-direction: column;   /* Keep text stacked vertically */
+    justify-content: center;  /* Vertically center the text relative to the image */
+}
+
+
+.buy-button, .add-to-wishlist {
+    margin-top: 10px;
+}
+
+
