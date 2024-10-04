@@ -1,6 +1,8 @@
 from django.db import models
 from apps.core.constraints import STORE_NAMES
 # Create your models here.
+
+
 class Product(models.Model):
     store = models.CharField(max_length=30, choices=STORE_NAMES)
     name = models.CharField(max_length=255)
@@ -14,3 +16,11 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return f"Store: {self.store}, Product: {self.name}, Price: {self.price}{self.currency}"
+    
+    @property # to avoid getting an error no image is available
+    def image_url(self):
+        try:
+            url = self.image
+        except:
+            url = ""
+        return url

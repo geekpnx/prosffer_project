@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+  <div>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Find me</button>
+    </form>
+  </div>
+
+  <div class="row">
+    {% for product in products %}
+      <div class="col-lg-4">
+        <img class="thumbnail" src="{{ product.image_url }}">
+        <div class="box-element product">
+          <h6><strong>{{ product.name }}</strong></h6>
+          <hr>
+
+          <!-- Using an anchor tag styled as a button -->
+          <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-secondary add-btn">Add to wishlist</a>
+
+          <!-- Using a form to handle the button click for adding to the wishlist -->
+          <!-- Uncomment the form if you prefer this method -->
+          <!--
+          <form action="{% url 'add_to_wishlist' product.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-secondary add-btn">Add to wishlist</button>
+          </form>
+          -->
+
+          <a class="btn btn-outline-success" href="#">View</a>
+          <h4 style="display: inline-block; float: right"><strong>€{{ product.price|floatformat:2}}</strong></h4>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock content %}
+

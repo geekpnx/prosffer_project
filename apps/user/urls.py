@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from .views import login_view, logout_view, signup_view, edit_profile_view, welcome_view, home, view_profile_view
+from .views import login_view, logout_view, signup_view, edit_profile_view, welcome_view, view_profile_view, store
 
 
 #app_name = "user"
 
 urlpatterns = [
   
-    path('', home, name='home'),
+    path('', store, name='store'),
     path("signup/", signup_view, name="signup"),
     path('login/', login_view, name='login'),
     path('view_profile/', view_profile_view, name='view_profile'),
