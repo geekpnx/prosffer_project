@@ -17,7 +17,8 @@
           <hr>
 
           <!-- Using an anchor tag styled as a button -->
-          <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-secondary add-btn">Add to wishlist</a>
+          {% comment %} <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-secondary add-btn">Add to wishlist</a> {% endcomment %}
+          <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-wishlist">Add to wishlist</button>
 
           <!-- Using a form to handle the button click for adding to the wishlist -->
           <!-- Uncomment the form if you prefer this method -->
