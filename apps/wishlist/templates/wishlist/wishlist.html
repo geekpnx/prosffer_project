@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div style="flex:1">
-                        <p class="total" data-product="{{ item.product.id }}">€{{ item.get_total|floatformat:2 }}</p> <!-- Assuming you're calculating the total based on quantity -->
+                        <p class="total" data-product="{{ item.product.id }}">€{{ item.get_total|floatformat:2 }}</p>
                 </div>
                 <div style="flex:1">
                     <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-outline-danger">Remove</a>

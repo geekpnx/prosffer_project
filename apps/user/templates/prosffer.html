@@ -15,6 +15,10 @@
         <div class="box-element product">
           <h6><strong>{{ product.name }}</strong></h6>
           <hr>
+          <h6>Category:<strong>{{ product.category }}</strong></h6>
+          <hr>
+          <h6>Store: <strong>{{ product.store }}</strong></h6>
+          <hr>
 
           <!-- Using an anchor tag styled as a button -->
           {% comment %} <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-outline-secondary add-btn">Add to wishlist</a> {% endcomment %}

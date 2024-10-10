@@ -49,6 +49,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+# # Email backend settings
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp-mail.outlook.com"  # Use the appropriate SMTP server
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "prosffer@outlook.com"  # Your email address
+# EMAIL_HOST_PASSWORD = "helloworld123"  # Your email password
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 TEMPLATES = [
     {
@@ -107,9 +115,9 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Inform django about the new user model 
+# Inform django about the new user model
 # AUT = <app_name>.<model_class>
-#AUTH_USER_MODEL = "user.User" # <-- your User authentication model goes here
+# AUTH_USER_MODEL = "user.User" # <-- your User authentication model goes here
 
 ROOT_URLCONF = "config.urls"
 
@@ -119,4 +127,3 @@ ROOT_URLCONF = "config.urls"
 #         'rest_framework.authentication.TokenAuthentication',
 #     ],
 # }
-

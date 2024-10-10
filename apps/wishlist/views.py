@@ -5,10 +5,11 @@ from apps.product.models import Product
 from django.http import JsonResponse
 import json
 
+
 def wishlist_view(request):
     items = []  # Initialize empty items list
     total = 0  # Initialize total price
-    wishlist_items = 0 
+    wishlist_items = 0
     if request.user.is_authenticated:
         try:
             # Get the wishlist for the authenticated user
@@ -17,7 +18,7 @@ def wishlist_view(request):
             items = WishlistItem.objects.filter(wishlist=wishlist)
             # Calculate the total price using the get_total property
             total = wishlist.get_wishlist_total
-            
+
             wishlist_items = wishlist.get_cart_items
 
         except WishList.DoesNotExist:
@@ -38,21 +39,23 @@ def wishlist_view(request):
 
 def update_item(request):
     data = json.loads(request.body)
-    productId = data['productId']
-    action = data['action']
+    productId = data["productId"]
+    action = data["action"]
 
-    print('action:', action)
-    print('productId:', productId)
+    print("action:", action)
+    print("productId:", productId)
 
     consumer = request.user.consumer
     product = Product.objects.get(id=productId)
 
     wishlist, created = WishList.objects.get_or_create(user=request.user.consumer)
-    wishlist_item, created = WishlistItem.objects.get_or_create( wishlist=wishlist, product=product)
+    wishlist_item, created = WishlistItem.objects.get_or_create(
+        wishlist=wishlist, product=product
+    )
 
-    if action == 'add':
+    if action == "add":
         wishlist_item.quantity += 1
-    elif action == 'remove':
+    elif action == "remove":
         wishlist_item.quantity -= 1
 
     wishlist_item.save()
@@ -64,7 +67,9 @@ def update_item(request):
     wishlist_items = wishlist.get_cart_items
     current_quantity = wishlist_item.quantity if wishlist_item.quantity > 0 else 0
 
-    return JsonResponse({"wishlist_items": wishlist_items,"quantity": current_quantity}, safe=False)
+    return JsonResponse(
+        {"wishlist_items": wishlist_items, "quantity": current_quantity}, safe=False
+    )
     # return JsonResponse('Item was added', safe=False)
 
 

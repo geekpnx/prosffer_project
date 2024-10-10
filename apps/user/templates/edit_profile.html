@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 {% load static %}
 
 {% block title %}Edit Profile{% endblock %}
@@ -9,14 +9,6 @@
     </header>
 
     <section>
-        {% comment %} <!-- Display success/error messages if any -->
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %} {% endcomment %}
 
         <!-- Display profile image if it exists -->
         {% if profile_form.instance.profile_image %}

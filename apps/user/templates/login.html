@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 {% load static %}
 
 {% block content %}
@@ -7,32 +7,18 @@
     </header>
 
     <section>
-        {% comment %} <!-- Display success/error messages if any exist -->
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>  <!-- Dynamically add class based on message type -->
-                {% endfor %}
-            </ul>
-        {% endif %} {% endcomment %}
-
-        <!-- Login Form -->
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            
-            <!-- Username Field -->
+
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             
-            <!-- Password Field -->
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <!-- Submit Button -->
             <button type="submit">Login</button>
         </form>
 
-        <!-- Link to Signup -->
         <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
 
         {% comment %} <!-- Check if user is authenticated to display the Edit Profile button -->

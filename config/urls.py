@@ -21,7 +21,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("apps.user.urls")), #, namespace="user")
-    #path('products/', include('apps.product.urls')),
-    path('wishlist/', include('apps.wishlist.urls')),
+    path("", include("apps.user.urls")),  # , namespace="user")
+    path('products/', include(('apps.product.urls'), namespace="user")),
+    path("wishlist/", include("apps.wishlist.urls")),
 ]

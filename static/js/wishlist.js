@@ -53,7 +53,7 @@ function updateUserWishlist(productId, action) {
         // Update the total for this product (price * quantity)
         var priceElement = document.querySelector(`.price[data-product='${productId}']`);
         var totalElement = document.querySelector(`.total[data-product='${productId}']`);
-        
+
         if (priceElement && totalElement) {
           var productPrice = parseFloat(priceElement.innerText.replace('€', ''));
           var newTotal = productPrice * newQuantity;
@@ -84,7 +84,7 @@ function updateWishlistTotal() {
   var totalElements = document.querySelectorAll('.total'); // Select all individual product totals
   var wishlistTotal = 0;
 
-  totalElements.forEach(function(totalElement) {
+  totalElements.forEach(function (totalElement) {
     var productTotal = parseFloat(totalElement.innerText.replace('€', ''));
     wishlistTotal += productTotal;
   });

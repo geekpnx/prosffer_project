@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from apps.product.models import Product
-from apps.wishlist.models import WishList, WishlistItem
+from apps.wishlist.models import WishList
+from apps.user.models import Consumer
 
 
 def store(request):
@@ -27,7 +28,11 @@ def store(request):
     context = {
         "products": products,
         "wishlist_items": wishlist_items,  # Total number of items in the wishlist
-        "items": items,  # Wishlist items (optional)
+        #"items": items,  # Wishlist items (optional)
     }
 
     return render(request, "prosffer.html", context)
+
+
+def about_view(request):
+    return render(request, "about.html")

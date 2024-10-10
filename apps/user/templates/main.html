@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Ecom</title>
+    <title>PROSFFER</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -17,15 +17,54 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'store' %}">About <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'about' %}">About <span class="sr-only">(current)</span></a>
           </li>
         </ul>
+
         <div class="form-inline my-2 my-lg-0">
           <a href="{% url 'wishlist' %}">
             <img id="cart-icon" src="{% static 'images/cart.png' %}">
           </a>
           <p id="cart-total">{{ wishlist_items }}</p>
-          <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+
+          <!-- Check if the user is authenticated -->
+          {% if user.is_authenticated %}
+            <!-- Dropdown menu for authenticated users -->
+            <img src="{% static 'images/icons/user.png' %}" class="user-pic" onclick="toggleMenu()" alt="User Pic">
+            <div class="sub-menu-wrap" id="subMenu">
+              <div class="sub-menu">
+                <div class="user-info">
+                  <img src="{% static 'images/icons/user.png' %}" alt="User Info">
+                  <h3>{{ user.username }}</h3>
+                </div>
+                <hr>
+                <a href="{% url 'edit_profile' %}" class="sub-menu-link">
+                  <img src="{% static 'images/icons/profile.png' %}" alt="Profile">
+                  <p>Profile</p>
+                  <span>></span>
+                </a>
+                <a href="" class="sub-menu-link">
+                  <img src="{% static 'images/icons/setting.png' %}" alt="Settings">
+                  <p>Settings & Privacy</p>
+                  <span>></span>
+                </a>
+                <a href="" class="sub-menu-link">
+                  <img src="{% static 'images/icons/help.png' %}" alt="Help">
+                  <p>Help & Support</p>
+                  <span>></span>
+                </a>
+                <a href="{% url 'logout' %}" class="sub-menu-link">
+                  <img src="{% static 'images/icons/logout.png' %}" alt="Logout">
+                  <p>Logout</p>
+                  <span>></span>
+                </a>
+              </div>
+            </div>
+          {% else %}
+            <!-- Show Login and Sign Up buttons for unauthenticated users -->
+            <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-outline-light">Sign Up</a>
+          {% endif %}
         </div>
       </div>
     </nav>
@@ -37,10 +76,9 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-XW8q3M5x3wGIP/u62lh8hhLw9fPzObG3O0v9F7LVx2pVd8XT2BniN7U8blQ3phLg" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-67qg6BbQ6J1cYIejD8BxJHb5S8tF4Tg3z0t7K1npX+/9PcF9gv3H4jz2f3yaWhf3" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'js/wishlist.js' %}"></script>
-
     <script type="text/javascript">
         var user = '{{request.user}}';
 
@@ -61,6 +99,14 @@
         }
 
         const csrftoken = getCookie('csrftoken');
+    </script>
+
+    <script>
+      let subMenu = document.getElementById("subMenu");
+
+      function toggleMenu() {
+          subMenu.classList.toggle("open-menu");
+      }
     </script>
 </body>
 </html>
