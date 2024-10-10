@@ -54,7 +54,7 @@ def get_wishlist(request):
 
     total_price = sum(product.price for product in products)
     
-    wishlist_data = [{'id': product.id, 'name': product.name, 'price': product.price, 'currency': product.currency, 'image': product.image} for product in products]
+    wishlist_data = [{'id': product.id, 'store': product.store, 'name': product.name, 'price': product.price, 'currency': product.currency, 'image': product.image} for product in products]
     
     return JsonResponse({
         'products': wishlist_data,

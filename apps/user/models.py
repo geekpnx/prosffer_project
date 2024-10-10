@@ -10,6 +10,5 @@ class Consumer(models.Model):
     date_of_birth= models.DateField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
 
-
     def __str__(self) -> str:
-        return f"{self.user}"
+        return self.user.username

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
-
+from django.db.models import Q
 
 from .models import Product
 
@@ -19,7 +19,7 @@ class ProductListView(ListView):
         product_name = self.request.GET.get('product_name')  # Get product name from query params
         if product_name:
             # Filter by product name (case-insensitive)
-            queryset = queryset.filter(name__icontains=product_name)
+            queryset = queryset.filter(Q(name__icontains=product_name))
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -28,7 +28,7 @@ class ProductListView(ListView):
 
         if product_name:
             # Get products grouped by name and store for comparison
-            products = Product.objects.filter(name__icontains=product_name).order_by('name', 'store')
+            products = Product.objects.filter(Q(name__icontains=product_name) | Q(category__icontains=product_name)).order_by('price')
             
             # Create a dictionary to hold product comparisons
             comparison_dict = {}

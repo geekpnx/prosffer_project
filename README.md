@@ -4,7 +4,7 @@ These steps below is only when you have cloned the repo.
 
 ## **STEP 1**
 
-After, you need to go to  **`prosffer`** folder.
+After, you need to go to  **`prosffer_project`** folder.
 
 - With the command:
 
