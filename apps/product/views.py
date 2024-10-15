@@ -5,10 +5,8 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView, DetailView
-
-
 from .models import Product
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -32,15 +30,15 @@ class ProductListView(ListView):
 
         if product_name:
             # Get products grouped by name and store for comparison
-            products = Product.objects.filter(name__icontains=product_name).order_by('name', 'store')
-            
+            products = Product.objects.filter(Q(name__icontains=product_name) | Q(category__icontains=product_name)).order_by("price")
+
             # Create a dictionary to hold product comparisons
             comparison_dict = {}
             for product in products:
                 if product.name not in comparison_dict:
                     comparison_dict[product.name] = []
                 comparison_dict[product.name].append(product)
-            
+
             for product_list in comparison_dict.values():
                 product_list.sort(key=lambda x: x.price)
 

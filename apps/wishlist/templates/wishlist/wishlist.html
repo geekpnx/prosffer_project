@@ -11,7 +11,9 @@
                     <th><h5>Items: <strong id="item-total">{{ wishlist_items }}</strong></h5></th>
                     <th><h5>Total: <strong id="wishlist-total"> €{{ total|floatformat:2 }}</strong></h5></th>
                     <th>
-                        <a style="float:right; margin:5px;" class="btn btn-success" href="#">Get your copy</a>
+                        <a style="float:right; margin:5px;" href="{% url 'download_wishlist' %}" class="btn btn-success">Download Wishlist (PDF)</a>
+
+                        {% comment %} <a style="float:right; margin:5px;"  class="btn btn-success" href="#">Get your copy</a> {% endcomment %}
                     </th>
                 </tr>
             </table>
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div style="flex:1">
-                        <p class="total" data-product="{{ item.product.id }}">€{{ item.get_total|floatformat:2 }}</p>
+                        <p class="total" data-product="{{ item.product.id }}">€{{ item.get_total|floatformat:2 }}</p> <!-- Assuming you're calculating the total based on quantity -->
                 </div>
                 <div style="flex:1">
                     <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-outline-danger">Remove</a>
