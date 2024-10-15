@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
+    <script>
+      const userIsLoggedIn = {{ user.is_authenticated|yesno:"true,false" }};
+    </script>
+    <script>
+      const saveWishlistUrl = "{% url 'wishlist-urls:save_wishlist' %}";
+     </script>
     <!-- Header Section -->
     <header>
       <div class="logo">
@@ -168,6 +174,8 @@
               <strong>Total Price:</strong>
               <span id="total-price-display">0.00 €</span>
             </p>
+            <button id="save-wishlist-btn">Save to Wishlist</button>
+            <button id="goto-wishlist-btn" onclick="location.href='{% url 'wishlist-urls:wishlist' %}'">GO to Wishlist</button>
           </div>
         </div>
       </div>
@@ -189,7 +197,7 @@
             <img
               src="{{ product.image }}"
               alt="{{ product_name }} thumbnail"
-              class="product-thumbnail"
+              class="product-thumbnail"32
             />
 
             <!-- Product Details -->
@@ -232,7 +240,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/suggestions_functions.js' %}"></script>
     <script src="{% static 'js/user_wishlist_button_functions.js' %}"></script>
-    <script src="{% static 'js/wishlist_dropdown_functions.js' %}"></script>
+    <script src="{% static 'js/wishlist_quickview_functions.js' %}"></script>
     <script src="{% static 'js/login_signup.js' %}"></script>
     
     <footer>

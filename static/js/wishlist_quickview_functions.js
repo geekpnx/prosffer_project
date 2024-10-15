@@ -2,6 +2,20 @@ let wishList = [];
 let totalPrice = 0;
 let totalItems = 0; // For tracking total items
 
+// Load wishlist from localStorage on page load
+document.addEventListener("DOMContentLoaded", function() {
+    const storedWishList = localStorage.getItem('wishlist');
+    if (storedWishList) {
+        wishList = JSON.parse(storedWishList);
+        totalPrice = 0; // Reset total price before recalculating
+        // Recalculate total price
+        wishList.forEach(item => {
+            totalPrice += item.price * item.quantity;
+        });
+        updateWishList(); // Update the UI with the stored wishlist
+    }
+});
+
 
 // Function to update quantity with a lower limit of 1
 function updateQuantity(productId, amount) {
@@ -14,6 +28,7 @@ function updateQuantity(productId, amount) {
         item.quantity += amount;
         totalPrice += item.price * amount; // Update total price
         updateWishList();
+        saveWishListToLocal(); // Save to local storage after update
     }
 }
 
@@ -85,7 +100,7 @@ function updateWishList() {
         row.appendChild(actionsCell);
         wishListItems.appendChild(row);
 
-        totalItems += item.quantity; // Update total items count
+        totalItems += item.quantity; // Update total items count    
     });
 
     totalPriceElement.textContent = `${totalPrice.toFixed(2)} €`; // Update total price
@@ -95,6 +110,12 @@ function updateWishList() {
     itemCountElement.textContent = totalItems;
     itemCountElement.style.display = totalItems > 0 ? 'inline-block' : 'none'; // Show only if items are in the wishlist
 }
+
+// Function to save wishlist to local storage
+function saveWishListToLocal() {
+    localStorage.setItem('wishlist', JSON.stringify(wishList));
+}
+
 
 // Function to add a product to the wishlist
 function addToList(productId, storeName, productName, productPrice, productCurrency, productImage) {
@@ -116,20 +137,7 @@ function addToList(productId, storeName, productName, productPrice, productCurre
     }
 
     updateWishList();
-    // AJAX call to the server
-    $.ajax({
-        url: `/wishlist/add/${productId}/`, // URL to add the product to the wishlist
-        type: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Ensure CSRF token is included
-        },
-        success: function(response) {
-            console.log("Product added to wishlist:", response);
-        },
-        error: function(xhr, status, error) {
-            console.error("Error adding to wishlist:", error);
-        }
-    });
+    saveWishListToLocal(); // Save to local storage
 }
 
 
@@ -142,20 +150,7 @@ function removeFromList(productId) {
         wishList.splice(index, 1); // Remove item
     }
     updateWishList();
-    // AJAX call to the server
-    $.ajax({
-        url: `/wishlist/remove/${productId}/`, // URL to remove the product from the wishlist
-        type: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Ensure CSRF token is included
-        },
-        success: function(response) {
-            console.log("Product removed from wishlist:", response);
-        },
-        error: function(xhr, status, error) {
-            console.error("Error removing from wishlist:", error);
-        }
-    });
+    saveWishListToLocal(); // Save to local storage
 }
 
 // Attach event listeners to add buttons
@@ -170,3 +165,60 @@ document.querySelectorAll('.add-to-wishlist').forEach(button => {
         addToList(productId, storeName, productName, productPrice, productCurrency, productImage);
     });
 });
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Function to save wishlist to the server
+function saveWishListToDatabase() {
+    $.ajax({
+        url: saveWishlistUrl,  // Use the dynamically generated URL from Django
+        type: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
+        },
+        data: JSON.stringify(wishList),  // Send the wishlist data as JSON
+        contentType: 'application/json',
+        success: function(response) {
+            console.log("Wishlist saved successfully:", response);
+            alert("Wishlist has been saved to your profile!");  // Optional user feedback
+        },
+        error: function(xhr, status, error) {
+            console.error("Error saving wishlist:", error);
+            alert("There was an error saving your wishlist. Please try again.");  // Optional user feedback
+        }
+    });
+}
+
+// Attach save button event listener (assuming you have a button with id 'save-wishlist-btn')
+document.getElementById('save-wishlist-btn').addEventListener('click', function() {
+    if (userIsLoggedIn) {  // Ensure you check for authentication in JavaScript
+        saveWishListToDatabase();  // Save the wishlist
+    } else {
+        alert("You need to log in to save your wishlist.");
+    }
+});
+
+// Attach save button event listener (assuming you have a button with id 'save-wishlist-btn')
+document.getElementById('save-wishlist-btn').addEventListener('click', function() {
+    if (userIsLoggedIn) {  // Assume you have a variable to check login status
+        saveWishListToDatabase();
+    } else {
+        alert("Please log in to save your wishlist.");
+    }
+});
+
+

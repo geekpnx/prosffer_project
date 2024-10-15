@@ -282,7 +282,7 @@ h2, h3 {
 .remove-from-wishlist {
     background: none;
     border: none;
-    color: #e83a68; /* Red color for remove */
+    color: #dd2630 ; /* Red color for remove */
     cursor: pointer;
 }
 
@@ -324,6 +324,43 @@ h2, h3 {
     display: inline; /* Just use inline to ensure it behaves like regular text */
 }
 
+#save-wishlist-btn, #goto-wishlist-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 14px;
+    background-color: #dd2630; /* Customize the color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+#save-wishlist-btn:hover, #goto-wishlist-btn:hover {
+    background-color: #ac2329; /* Hover color */
+}
+  
+#wishlist-content {
+    text-align: center; /* Optional: Center content */
+}
+  
+#wishlist-content button {
+    margin-top: 10px; /* Add spacing if needed */
+}
+
+.wishlist-actions {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+  }
+  
+@media screen and (max-width: 768px) {
+.wishlist-actions {
+    flex-direction: column; /* Stack buttons on smaller screens */
+}
+}
+
+
 /* ------------- User menu -------------  */
 
 /* Style for the user menu and button */
@@ -357,7 +394,7 @@ h2, h3 {
     height: 70%; /* 100% of the button's height */
     display: block; /* Ensure it's treated as a block element */
     border-radius: 50%; /* Make the image circular */
-    border: 3px solid #e83a68; /* Add a solid border (adjust color and thickness) */
+    border: 3px solid #dd2630 ; /* Add a solid border (adjust color and thickness) */
     object-fit: cover; /* Ensure the image maintains aspect ratio and covers the container */
     margin-top: 10px;
 }
@@ -401,7 +438,7 @@ h2, h3 {
 
 /* Hover effect for dropdown links */
 .user-dropdown-content a:hover {
-    background-color: #e83a68;
+    background-color: #dd2630 ;
     color: white;
     text-decoration-color: #ccc;
 }
@@ -484,7 +521,7 @@ h2, h3 {
   /* Buttons specifically for the form-container */
   .form-container button {
     padding: 10px 20px;
-    background-color: #e83a68;
+    background-color: #dd2630 ;
     color: white;
     border: none;
     border-radius: 4px;
@@ -494,7 +531,7 @@ h2, h3 {
   /* Align messages */
   .messages {
     margin-bottom: 15px;
-    color: #e83a68;
+    color: #dd2630 ;
     font-weight: bold;
   }
   
@@ -504,7 +541,7 @@ h2, h3 {
   }
   
   .form-container a {
-    color: #e83a68;
+    color: #dd2630 ;
     text-decoration: none;
   }
   
@@ -564,7 +601,7 @@ p {
 }
 
 .profile-header {
-    background-color: #e83a68;
+    background-color: #dd2630 ;
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -724,7 +761,7 @@ input {
 
 #edit-section form button[type="submit"],
 #edit-section form button[type="button"] {
-    background-color: #e83a68;
+    background-color: #dd2630 ;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -735,7 +772,7 @@ input {
 
 #edit-section form button[type="submit"]:hover,
 #edit-section form button[type="button"]:hover {
-    background-color: #e83a68;
+    background-color: #dd2630 ;
 }
 
 form {
