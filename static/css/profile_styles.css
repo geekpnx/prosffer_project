@@ -754,6 +754,7 @@ input {
 #edit-section form input,
 #edit-section form select,
 #edit-section form textarea {
+    font-family: 'Abel';
     margin-bottom: 15px;
     padding: 10px;
     font-size: 1rem;

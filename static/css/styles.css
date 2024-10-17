@@ -89,36 +89,54 @@ header {
     justify-content: center;
 }
 
-.search-container button[type="submit"]:hover {
-    background-color: #d14160;
-}
 
 .search-container button[type="submit"] img {
     width: 25px;
     height: 25px;
 }
 
+/* -------- Category ---------------------- */
+/* Styling the category dropdown */
+.search-container select#category-select {
+    font-family: 'Abel';
+    padding: 10px 20px;
+    width: 220px;
+    font-size: 18px;
+    background-color: #dd2630;
+    color: #fff;
+    appearance: none; /* Remove default select arrow for custom styling */
+    -webkit-appearance: none; /* For Chrome */
+    -moz-appearance: none; /* For Firefox */
+    margin-left: 0px; /* Adjust spacing */
+    margin-right: 0px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative; /* Keep it positioned naturally */
+}
 
 
 
+/* Suggestions dropdown styles */
 /* Suggestions dropdown styles */
 .suggestions {
     flex: 1;
     position: absolute;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: auto;
     margin-top: 5px; /* No extra margin */
-    padding: 0;
+    padding: 15px;
     display: none; /* Hidden by default */
     top: 92px; /* Distance below input (adjust based on input height) */
     left: 50%; /* Center the suggestions container relative to the form */
     transform: translateX(-50%); /* Shift it left by 50% to center-align */
     box-sizing: border-box; /* Ensures padding doesn't break the width */
-    min-width: 450px; 
+    min-width: 600px; 
 }
 
 /* Style for each suggestion item */
@@ -130,10 +148,10 @@ header {
     text-align: left;
 }
 
+/* Hover effect for suggestion items */
 .suggestions p:hover {
-    background-color: #ececec;
-    background-color: #dd2630;
-    color: white;
+    background-color: #dd2630; /* Change background color on hover */
+    color: white; /* Change text color on hover */
 }
 
 
@@ -155,23 +173,30 @@ h2 {
     padding: 20px;
 }
 
+/* --------- Product card ------- */
+
 .product-card {
+    position: relative; /* Make the product card a positioned container */
+    width: 300px; /* Fixed width */
+    height: 700px; /* Fixed height */
     object-fit: contain; 
     background-color: #ffffff; /* Card background */
     border: 1px solid #ddd; /* Light border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px;
-    width: 300px; /* Set a fixed width for cards */
+    border-radius: 20px; /* Rounded corners */
+    padding: 35px 30px 0px 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     transition: transform 0.2s; /* Animation effect */
+    overflow: hidden; /* Ensures elements don’t overflow */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
 }
 
 
-/* --------- Product card ------- */
+
 
 
 .product-card h3 {
-    font-size: 1.50em;
+    font-size: 20px;
     font-weight: bolder;
     padding: 0 15px;
 }
@@ -188,9 +213,9 @@ h2 {
 
 
 .product-thumbnail {
-    width: 98%;
-    height: 98%;
-    object-fit: contain;  /* Resizes the image proportionally to fit within the container */
+    width: 100%;
+    height: auto;
+    max-height: 350px;
     padding: 2px;  /* Optional: Adds some space inside the image container */
     border-radius: 5px; /* Optional: Rounds the edges of the image container */
     margin: 0 auto; 
@@ -215,6 +240,10 @@ h2 {
     padding-left: 10px;
 }
 
+
+
+
+
 /* Store Name Styles */
 .product-details .store-name {
     font-weight:500;
@@ -226,7 +255,7 @@ h2 {
 /* Product Description Styles */
 .product-details .product-desc {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 15px;
     color: #777777;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -260,48 +289,52 @@ h2 {
     margin-top: 50px; /* Add margin so it doesn't get too close to the search bar */
 }
 
+
 /* Container for buttons (view and wishlist) */
 .button-container {
-    display: flex; /* Align items horizontally */
-    justify-content: flex-start; /* Align buttons to the left */
-    gap: 10px; /* Space between buttons */
-    margin-top: 10px; /* Add some spacing from the product details */
-}
-
-/* View button styles */
-.view-button {
-    width: 35px;
-    height: 35px;
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-/* Add to wishlist button styles */
-.add-to-wishlist {
-    width: 35px;
-    height: 35px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Ensure both icons have a consistent size */
-.view-button img,
-.add-to-wishlist img {
     width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+
+.view-button, 
+.add-to-wishlist {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.view-button {
+    width: 42px;
+    height: 42px;
+
+}
+
+
+
+.view-button img, 
+.add-to-wishlist img {
+    width: 100%;  /* Ensure both SVGs scale to the full size */
     height: 100%;
     object-fit: contain;
+    display: block;
+    padding: 0;
+    margin-top: 30px;
 }
 
-
-
+.add-to-wishlist img {
+    margin-top: 22px;
+}
 /* ----------- Wish List ------------ */
 
 /* Wishlist Dropdown Styles */
@@ -383,12 +416,13 @@ h2 {
 }
 
 /* Wishlist Title and Total Price Section */
-.wishlist-header, .wishlist-footer {
+/* .wishlist-header, .wishlist-footer {
     padding: 15px 0;
     background-color: #fff;
     font-weight: bold;
     font-size: 18px;
-}
+    position: sticky;
+} */
 
 
 .wishlist-content p {

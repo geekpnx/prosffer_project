@@ -212,13 +212,4 @@ document.getElementById('save-wishlist-btn').addEventListener('click', function(
     }
 });
 
-// Attach save button event listener (assuming you have a button with id 'save-wishlist-btn')
-document.getElementById('save-wishlist-btn').addEventListener('click', function() {
-    if (userIsLoggedIn) {  // Assume you have a variable to check login status
-        saveWishListToDatabase();
-    } else {
-        alert("Please log in to save your wishlist.");
-    }
-});
-
 

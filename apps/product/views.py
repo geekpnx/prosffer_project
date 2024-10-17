@@ -80,3 +80,5 @@ def product_search(request):
         product_names = [product.name for product in products]
         return JsonResponse(product_names, safe=False)
     return JsonResponse([], safe=False)
+
+
