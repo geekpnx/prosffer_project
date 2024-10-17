@@ -141,3 +141,6 @@ def save_wishlist(request):
             return JsonResponse({'status': 'success'}, status=200)
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+

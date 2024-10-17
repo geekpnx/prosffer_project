@@ -16,32 +16,56 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        product_name = self.request.GET.get('product_name')  # Get product name from query params
-        if product_name:
-            # Filter by product name (case-insensitive)
-            queryset = queryset.filter(Q(name__icontains=product_name))
+        product_name = self.request.GET.get('product_name', '')
+        category = self.request.GET.get('category', '')
+
+        # Use regex for advanced filtering by product name and category
+        if product_name and category:
+            queryset = queryset.filter(
+                Q(name__iregex=r'\y{}\y'.format(product_name)) & 
+                Q(category__iregex=r'\y{}\y'.format(category))
+            ).order_by('price')
+        elif product_name:
+            queryset = queryset.filter(Q(name__iregex=r'\y{}\y'.format(product_name))).order_by('price')
+        elif category:
+            queryset = queryset.filter(Q(category__iregex=r'\y{}\y'.format(category))).order_by('price')
+
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product_name = self.request.GET.get('product_name')
 
-        if product_name:
-            # Get products grouped by name and store for comparison
-            products = Product.objects.filter(Q(name__icontains=product_name) | Q(category__icontains=product_name)).order_by('price')
-            
-            # Create a dictionary to hold product comparisons
-            comparison_dict = {}
-            for product in products:
-                if product.name not in comparison_dict:
-                    comparison_dict[product.name] = []
-                comparison_dict[product.name].append(product)
-            
-            for product_list in comparison_dict.values():
-                product_list.sort(key=lambda x: x.price)
+        # Fetch distinct categories from the Product model
+        categories = Product.objects.values_list('category', flat=True).distinct()
+        context['categories'] = categories
 
-            context['comparison_dict'] = comparison_dict
         return context
+    
+
+# AJAX-based product list view
+def product_list_ajax(request):
+    product_name = request.GET.get('product_name', '')
+    category = request.GET.get('category', '')
+
+    products = Product.objects.filter(
+        Q(name__icontains=product_name) & Q(category__icontains=category)
+    ).order_by('price')
+
+    products_data = [
+        {
+            'name': product.name,
+            'price': product.price,
+            'store': product.store,
+            'description': product.description,
+            'image': product.image.url,
+            'link': product.link,
+        }
+        for product in products
+    ]
+
+    return JsonResponse({'products': products_data})
+
 
 class ProductDetailView(DetailView):
     model = Product

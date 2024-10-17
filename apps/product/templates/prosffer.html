@@ -40,6 +40,14 @@
             value="{{ request.GET.product_name }}"
             autocomplete="off"
           />
+          <select id="category-select" name="category">
+            <option value="">Select Category</option>
+              {% for cat in categories %}
+            <option value="{{ cat }}" {% if request.GET.category == cat %}selected{% endif %}>
+              {{ cat }}
+            </option>
+              {% endfor %}
+          </select>
           <button type="submit">
             <img
               src="{% static 'images/icons/looper-white.svg' %}"
@@ -51,7 +59,7 @@
           {% for suggestion in suggestions %}
           <p>{{ suggestion }}</p>
           {% endfor %}
-        </div>
+        </div> 
       </div>
 
           <div class="user-menu">
@@ -182,59 +190,47 @@
     </header>
 
 
-    <!-- Show comparison results -->
-    {% if comparison_dict %}
-      <h2>Proactively Surf Offers</h2>
+<!-- Product Listing Section -->
+<div id="product-list">
+    {% if products %}
+    <div class="slogan">
+      <h2>Proactively Surf Best Offers</h2>
     </div>
     <div class="product-comparison">
-      {% for product_name, product_list in comparison_dict.items %}
+      {% for product in products %}
       <div class="product-card">
-        <h3>{{ product_name }}</h3>
-        <div class="product-details">
-          {% for product in product_list %}
-          <div class="product-item">
-            <!-- Product Thumbnail -->
-            <img
-              src="{{ product.image }}"
-              alt="{{ product_name }} thumbnail"
-              class="product-thumbnail"32
-            />
-
-            <!-- Product Details -->
-            <div class="product-details">
+          <h3>{{ product.name }}</h3>
+          <div class="product-details">
+              <img src="{{ product.image }}" alt="{{ product.name }}" class="product-thumbnail" />
               <span class="store-name">{{ product.store }}</span>
               <span class="product-desc">{{ product.description }}</span>
               <span class="price">{{ product.price }} {{ product.currency }}</span>
+              <a href="{{ product.link }}" target="_blank" class="view-button">
+                  <img src="{% static 'images/icons/view_icon.svg' %}" alt="View Icon" />
+              </a>
+              <button
+                class="add-to-wishlist"
+                data-product-id="{{ product.id }}"
+                data-store-name="{{ product.store }}"
+                data-product-name="{{ product.name }}"
+                data-product-price="{{ product.price }}"
+                data-product-currency="{{ product.currency }}"
+                data-product-image="{{ product.image }}"
+              >
+                <img
+                  src="{% static 'images/icons/add_icon.svg' %}"
+                  alt="Add Icon"
+                />
+              </button>
             </div>
-            <a href="{{ product.link }}" target="_blank" class="view-button">
-              <img
-                src="{% static 'images/icons/view_icon.svg' %}"
-                alt="View Icon"
-              />
-            </a>
-            <button
-              class="add-to-wishlist"
-              data-product-id="{{ product.id }}"
-              data-store-name="{{ product.store }}"
-              data-product-name="{{ product.name }}"
-              data-product-price="{{ product.price }}"
-              data-product-currency="{{ product.currency }}"
-              data-product-image="{{ product.image }}"
-            >
-              <img
-                src="{% static 'images/icons/add_icon.svg' %}"
-                alt="Add Icon"
-              />
-            </button>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
     {% else %}
     <p class="no-products"></p>
     {% endif %}
+</div>
+
 
     <!-- External JS file -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
