@@ -253,21 +253,52 @@ h2 {
     border-bottom: none; /* Remove border from last item */
 }
 
-.view-button {
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-    position: relative;
-    top: -1px; /* Adjust value as needed to push it up */
-    left: 5px;
-}
+
 
 /* Ensure the product card is not affected */
 .product-comparison {
     margin-top: 50px; /* Add margin so it doesn't get too close to the search bar */
 }
 
+/* Container for buttons (view and wishlist) */
+.button-container {
+    display: flex; /* Align items horizontally */
+    justify-content: flex-start; /* Align buttons to the left */
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px; /* Add some spacing from the product details */
+}
 
+/* View button styles */
+.view-button {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Add to wishlist button styles */
+.add-to-wishlist {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure both icons have a consistent size */
+.view-button img,
+.add-to-wishlist img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
 
 
@@ -507,28 +538,6 @@ h2 {
 /* Adjust hover effect for the remove button */
 .remove-from-wishlist:hover {
     text-decoration: underline; /* Underline on hover */
-}
-
-/* Style for the Add to Wishlist button in product cards */
-.add-to-wishlist {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    padding-top: 30px;
-    box-shadow: none;
-}
-
-.add-to-wishlist img {
-    margin-left: 200px;
-    display: block;
-    background: none;
-    border: none;
-    width: 35px;
-    height: 35px;
-    padding: 1px;
-    cursor: pointer;
 }
 
 #total-price {
