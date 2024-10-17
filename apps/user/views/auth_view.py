@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
+from apps.user.models import Consumer  # Import the Consumer model
+
+
 def signup_view(request):
     if request.method == 'POST':
         # Get data from the form
@@ -25,6 +28,11 @@ def signup_view(request):
         else:
             # Create a new user
             user = User.objects.create_user(username=username, password=password1, email=email)
+
+                        
+            # Create a Consumer object associated with the new user
+            Consumer.objects.create(user=user)
+
             login(request, user)
             response_data['success'] = f'Signup successful! Welcome, {username}'
             return JsonResponse(response_data)

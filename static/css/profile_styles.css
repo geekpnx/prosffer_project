@@ -607,7 +607,11 @@ p {
     padding: 20px 0;
     font-size: 1.8rem;
     font-weight: 700;
-    max-height: 100px;
+    height: 150px; /* Fixed height to keep the header consistent */
+    display: flex; /* Flexbox for centering */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    padding: 0 20px; /* Optional: Side padding */
 }
 
 /* Edit Button */

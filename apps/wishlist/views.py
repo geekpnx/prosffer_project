@@ -17,8 +17,8 @@ def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.user.is_authenticated:
-        # Get the Consumer associated with the logged-in user
-        consumer = Consumer.objects.get(user=request.user)
+        # Get or create the Consumer associated with the logged-in user
+        consumer, created = Consumer.objects.get_or_create(user=request.user)
         
         # Get or create the wishlist for the authenticated consumer
         wishlist, created = WishList.objects.get_or_create(consumer=consumer)
@@ -30,7 +30,6 @@ def add_to_wishlist(request, product_id):
         if product_id not in session_wishlist:
             session_wishlist.append(product_id)
             request.session['wishlist'] = session_wishlist
-        return JsonResponse({'status': 'success', 'message': 'Product added to guest wishlist!'})
         return JsonResponse({'status': 'success', 'message': 'Product added to guest wishlist!'})
 
 # Remove product from wishlist
@@ -90,8 +89,8 @@ def get_wishlist_total(request):
 # Render the wishlist page (wishlist.html)
 @login_required
 def wishlist_view(request):
-    # Check if the user is authenticated and retrieve the associated Consumer
-    consumer = Consumer.objects.get(user=request.user)
+    # Try to get or create a Consumer for the logged-in user
+    consumer, created = Consumer.objects.get_or_create(user=request.user)
     
     # Get or create the wishlist for the authenticated user
     wishlist, created = WishList.objects.get_or_create(consumer=consumer)
@@ -121,7 +120,6 @@ def wishlist_view(request):
         'total_price': total_price
     }
     return render(request, 'wishlist/wishlist.html', context)
-
 
 
 @csrf_exempt
