@@ -844,8 +844,72 @@ h2 {
 }
 
 
+/* ----------------   Pages ------------------------ */
 
-  /* Footer Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin: 20px 0;
+}
+
+.step-links {
+    display: flex;
+    justify-content: center;
+}
+
+.step-links a, .step-links span {
+    padding: 10px 20px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 25px; /* Fully rounded corners */
+    font-weight: bold;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.step-links a {
+    background-color: #f4f4f4;
+    color: #dd2630;
+    border: 2px solid #dd2630; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-links a:hover {
+    background-color: #dd2630;
+    color: #fff;
+}
+
+.step-links span.current {
+    background-color: #dd2630;
+    color: #333;
+    border: 2px solid #dd2630;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 2px;
+}
+
+.step-links span.disabled {
+    padding: 10px 20px;
+    margin: 0 5px;
+    color: #ddd;
+    border: 2px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+.step-links a, .step-links span {
+    cursor: pointer;
+}
+
+.step-links a:focus, .step-links a:active {
+    outline: none;
+    background-color: #d14160;
+    color: #fff;
+}
+
+
+
+  /* ---------------- Footer Styling ---------------- */
 footer {
     text-align: center;
     margin-top: 500px;

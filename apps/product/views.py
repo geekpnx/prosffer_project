@@ -13,6 +13,8 @@ class ProductListView(ListView):
     model = Product
     template_name = 'prosffer.html'
     context_object_name = 'products'
+    paginate_by = 12
+
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -34,14 +36,24 @@ class ProductListView(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+            # Get the default context data from the parent class
+            context = super().get_context_data(**kwargs)
 
-        # Fetch distinct categories from the Product model
-        categories = Product.objects.values_list('category', flat=True).distinct()
-        context['categories'] = categories
+            # Fetch distinct categories from the Product model
+            categories = Product.objects.values_list('category', flat=True).distinct()
+            context['categories'] = categories
 
-        return context
-    
+            # Add pagination-related context
+            context['is_paginated'] = context['paginator'].num_pages > 1 if 'paginator' in context else False
+            context['page_obj'] = context.get('page_obj')
+            context['paginator'] = context.get('paginator')
+
+            # Pass the current search query to the context
+            context['search_query'] = self.request.GET.get('product_name', '')
+            context['search_category'] = self.request.GET.get('category', '')
+
+            return context
+        
 
 # AJAX-based product list view
 def product_list_ajax(request):
@@ -80,5 +92,6 @@ def product_search(request):
         product_names = [product.name for product in products]
         return JsonResponse(product_names, safe=False)
     return JsonResponse([], safe=False)
+
 
 

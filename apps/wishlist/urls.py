@@ -9,4 +9,5 @@ urlpatterns = [
     path('wishlist/remove/<int:product_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
     path('wishlist/total/', views.get_wishlist_total, name='get_wishlist_total'),
     path('wishlist/save/', views.save_wishlist, name='save_wishlist'),
+    path("wishlist/download/", views.download_wishlist_pdf, name="download_wishlist"),
 ]

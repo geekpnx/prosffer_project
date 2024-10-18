@@ -53,6 +53,34 @@ h2, h3 {
 }
 
 
+/* ----------- Download PDF ------------ */
+
+.custom-download-btn {
+  background-color: #007bff;
+  
+  border-color: #0056b3;
+ 
+  color: white;
+ 
+  padding: 10px 20px;
+  
+  font-weight: bold;
+  
+  text-transform: uppercase;
+  
+  border-radius: 8px;
+ 
+  transition: background-color 0.3s ease;
+
+}
+
+.custom-download-btn:hover {
+  background-color: #0056b3;
+  
+  color: #fff;
+ 
+}
+
 /* ----------- Wish List ------------ */
 
 /* Wishlist Dropdown Styles */

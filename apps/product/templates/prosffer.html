@@ -228,6 +228,25 @@
           </div>
         {% endfor %}
     </div>
+    {% if is_paginated %}
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+          <a href="?page=1{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">&laquo; First</a>
+          <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">Previous</a>
+        {% endif %}
+  
+        <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+  
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">Last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  {% endif %}
     {% else %}
     <p class="no-products"></p>
     {% endif %}
