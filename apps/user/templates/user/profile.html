@@ -225,13 +225,13 @@
                     {{ profile_form.as_p }}
 
                 <!-- Toggle to enable/disable profile image -->
-                <div class="toggle-profile-image">
+                {% comment %} <div class="toggle-profile-image">
                     <label for="toggleProfileImage">Use Profile Image:</label>
                     <label class="switch">
                         <input type="checkbox" id="toggleProfileImage" onchange="toggleProfileImage()" {% if consumer.profile_image %}checked{% endif %}>
                         <span class="slider round"></span>
                     </label>
-                </div>
+                </div> {% endcomment %}
                 
                 <!-- File Upload (hidden) -->
                 <input type="file" id="fileUpload" name="profile_image" style="display: none;" accept="image/*" autocomplete="off">
