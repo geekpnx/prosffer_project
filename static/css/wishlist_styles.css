@@ -53,24 +53,144 @@ h2, h3 {
 }
 
 
-/* ----------- Download PDF ------------ */
+/* ----------- Wishlist  On the body ------------ */
+
+/* General Wishlist Styles */
+.wishlist-body-con {
+  max-width: 80%; /* Makes the wishlist centered with 80% width of the screen */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 20px;
+}
+
+.wishlist-full-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  position: sticky;
+  top: 0; /* Sticks the header to the top when scrolling */
+  z-index: 100;
+  padding-right: 10px;
+}
+
+.wishlist-full-header p {
+  font-family: "Abel";
+  font-size: 24px;
+  margin: 0;
+  color: #424242;
+}
 
 .custom-download-btn {
-  background-color: #007bff;
-  border-color: #0056b3;
+  background-color: #dd2630;
+  border: none;
   color: white;
   padding: 10px 20px;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-size: 15px;
   border-radius: 8px;
+  text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
 .custom-download-btn:hover {
-  background-color: #0056b3;
-  color: #fff;
- 
+  background-color: #a8161d;
 }
+
+#wishlist-items {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ensures table columns have a fixed width */
+}
+
+#wishlist-items thead th {
+  background-color: #f9f9f9;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+}
+
+#wishlist-items tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#wishlist-items th:nth-child(1),
+#wishlist-items td:nth-child(1) {
+  width: 10%; /* Image column */
+}
+
+#wishlist-items th:nth-child(2),
+#wishlist-items td:nth-child(2) {
+  width: 15%; /* Store column */
+}
+
+#wishlist-items th:nth-child(3),
+#wishlist-items td:nth-child(3) {
+  width: 30%; /* Product name column */
+}
+
+#wishlist-items th:nth-child(4),
+#wishlist-items td:nth-child(4) {
+  width: 10%; /* Quantity column */
+  text-align: center;
+}
+
+#wishlist-items th:nth-child(5),
+#wishlist-items td:nth-child(5) {
+  width: 15%; /* Price column */
+  text-align: right;
+}
+
+#wishlist-items th:nth-child(6),
+#wishlist-items td:nth-child(6) {
+  width: 20%; /* Actions column */
+  text-align: center;
+}
+
+/* Wishlist footer styles */
+.wishlist-full-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-top: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.wishlist-full-footer p {
+  background-color: #353535;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 0px;
+  margin: 0;
+  border-radius: 8px;
+  text-align: center; /* Ensures the total price aligns under the price column */
+  height: 25px;
+  flex-basis: 20%; /* Matches the width of the Actions column */
+}
+
+.wishlist-full-footer button {
+  font-family: inherit;
+  flex-basis: 20%; /* Matches the width of the Actions column */
+  background-color: #353535;
+  border: none;
+  color: white;
+  padding: 10px 0px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center; /* Ensures the total price aligns under the price column */
+  height: 45px;
+}
+
+.wishlist-full-footer button:hover {
+  background-color: #5f5d5d;
+}
+
 
 /* ----------- Wish List ------------ */
 
@@ -97,6 +217,7 @@ h2, h3 {
   justify-content: center; /* Center icon horizontally */
   margin-left: -200px; /* Move wishlist to the left */
   margin-top: 20px;
+  cursor:unset;
 }
 
 /* Ensure the icon fits perfectly inside the button */
@@ -170,14 +291,6 @@ h2, h3 {
   padding: 8px 30px;
 }
 
-.wishlist-content h4 {
-  font-weight: bold;
-  font-size: 25px;
-  color: rgb(52, 51, 51);
-  padding: 15px 15px;
-  margin-block-start: 20px;
-  margin-block-end: 10px;
-}
 
 
 /* Wishlist Items - Only the items should scroll */
@@ -192,7 +305,7 @@ h2, h3 {
 #wishlist-items {
   list-style: none; /* Remove bullets */
   padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
+  margin: 0 auto; /* Remove margin */
   max-height: 300px; /* Limit height for overflow */
   overflow-y: auto; /* Enable scrolling if necessary */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -301,7 +414,7 @@ margin: 0 5px;
 .remove-from-wishlist {
   background: none;
   border: none;
-  color: #e83a68; /* Red color for remove */
+  color: #dd2630; /* Red color for remove */
   cursor: pointer;
 }
 
@@ -376,7 +489,7 @@ margin: 0 5px;
   height: 70%; /* 100% of the button's height */
   display: block; /* Ensure it's treated as a block element */
   border-radius: 50%; /* Make the image circular */
-  border: 3px solid #e83a68; /* Add a solid border (adjust color and thickness) */
+  border: 3px solid #dd2630; /* Add a solid border (adjust color and thickness) */
   object-fit: cover; /* Ensure the image maintains aspect ratio and covers the container */
   margin-top: 10px;
 }
@@ -397,16 +510,37 @@ margin: 0 5px;
   font-size: 18px;
   display: none; /* Hidden initially */
   position: absolute;
-  right: 0;
+  right: 20px;
   background-color: #f5f5f5;
   min-width: 160px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border-radius: 8px; /* Optional: give it a card-like view */
+  border-radius: 20px; /* Optional: give it a card-like view */
   overflow: hidden;
   margin-top: 100px;
   padding: 0px;
   border: 1px solid #d7d7d7;
+}
+
+
+.user-dropdown-content p {
+  background-color: #424242;
+  color: #fff;
+  padding: 15px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin: 0px;
+}
+
+
+/* ----- Line divider -------- */
+.divider {
+  width: 100%; /* Make the line full width */
+  border: none; /* Remove default border */
+  height: 1px; /* Set height for the line */
+  background-color: #ccc; /* Line color */
+  margin: 0; /* Add some margin above and below the line */
 }
 
 /* Dropdown links */
@@ -420,7 +554,7 @@ margin: 0 5px;
 
 /* Hover effect for dropdown links */
 .user-dropdown-content a:hover {
-  background-color: #e83a68;
+  background-color: #dd2630;
   color: white;
   text-decoration-color: #ccc;
 }
@@ -503,7 +637,7 @@ margin: 0 5px;
 /* Buttons specifically for the form-container */
 .form-container button {
   padding: 10px 20px;
-  background-color: #e83a68;
+  background-color: #dd2630;
   color: white;
   border: none;
   border-radius: 4px;
@@ -513,7 +647,7 @@ margin: 0 5px;
 /* Align messages */
 .messages {
   margin-bottom: 15px;
-  color: #e83a68;
+  color: #dd2630;
   font-weight: bold;
 }
 
@@ -523,7 +657,7 @@ margin: 0 5px;
 }
 
 .form-container a {
-  color: #e83a68;
+  color: #dd2630;
   text-decoration: none;
 }
 
@@ -561,14 +695,6 @@ margin: 0 5px;
 .messages p.success {
   color: green;  /* Style for success messages */
   border-color: green;  /* Border color for success */
-}
-
-
-
-p {
-  color: #555;
-  line-height: 1.6;
-  font-size: 1rem;
 }
 
 

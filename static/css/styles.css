@@ -99,11 +99,12 @@ header {
 /* Styling the category dropdown */
 .search-container select#category-select {
     font-family: 'Abel';
+    font-weight: 600;
     padding: 10px 20px;
     width: 220px;
     font-size: 18px;
-    background-color: #dd2630;
-    color: #fff;
+    background-color: #ccc;
+    color: #353535;
     appearance: none; /* Remove default select arrow for custom styling */
     -webkit-appearance: none; /* For Chrome */
     -moz-appearance: none; /* For Firefox */
@@ -677,7 +678,7 @@ h2 {
     font-size: 18px;
     display: none; /* Hidden initially */
     position: absolute;
-    right: 0;
+    right: 20px;
     background-color: #f5f5f5;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -689,9 +690,31 @@ h2 {
     border: 1px solid #d7d7d7;
 }
 
+.user-dropdown-content p {
+    background-color: #424242;
+    color: #fff;
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: 0px;
+}
+
+
+/* ----- Line divider -------- */
+.divider {
+    width: 100%; /* Make the line full width */
+    border: none; /* Remove default border */
+    height: 1px; /* Set height for the line */
+    background-color: #ccc; /* Line color */
+    margin: 0; /* Add some margin above and below the line */
+}
+
+
+
 /* Dropdown links */
 .user-dropdown-content a {
-    color: black;
+    color: #353535;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -729,94 +752,101 @@ h2 {
     justify-content: center;
     align-items: center;
   }
-  
-  /* Modal content styling for both login and signup */
-  .modal-content {
-    margin: auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 400px;
-    background-color: #ffffff; /* Unified background color */
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Close button styling */
-  .close {
-    color: #fefefe;
-    position: absolute;
-    right: 20px; /* Ensures it's aligned on the right */
-    top: 15px; /* Top alignment */
-    font-size: 28px;
+
+
+.modal .messages p {
+    color: #dd2630;  /* or any other styling */
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: rgb(198, 198, 198);
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  /* Consistent styling for both login and signup forms */
-  .form-container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  /* Form labels and inputs specifically for the form-container */
-  .form-container label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .form-container input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  /* Buttons specifically for the form-container */
-  .form-container button {
-    padding: 10px 20px;
-    background-color: #dd2630;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Align messages */
-  .messages {
     margin-bottom: 15px;
-    color: #dd2630;
-    font-weight: bold;
-  }
+}
   
-  /* Links for navigation between login and signup */
-  .form-container p {
-    text-align: center;
-  }
-  
-  .form-container a {
-    color: #dd2630;
-    text-decoration: none;
-  }
-  
-  .form-container a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Ensure full width of input and form alignment */
-  .form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
+/* Modal content styling for both login and signup */
+.modal-content {
+margin: auto;
+padding: 20px;
+width: 80%;
+max-width: 400px;
+background-color: #ffffff; /* Unified background color */
+border-radius: 8px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Close button styling */
+.close {
+color: #fefefe;
+position: absolute;
+right: 20px; /* Ensures it's aligned on the right */
+top: 15px; /* Top alignment */
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: rgb(198, 198, 198);
+text-decoration: none;
+cursor: pointer;
+}
+
+/* Consistent styling for both login and signup forms */
+.form-container {
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+/* Form labels and inputs specifically for the form-container */
+.form-container label {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.form-container input {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+/* Buttons specifically for the form-container */
+.form-container button {
+padding: 10px 20px;
+background-color: #dd2630;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+/* Align messages */
+.messages {
+margin-bottom: 15px;
+color: #dd2630;
+font-weight: bold;
+}
+
+/* Links for navigation between login and signup */
+.form-container p {
+text-align: center;
+}
+
+.form-container a {
+color: #dd2630;
+text-decoration: none;
+}
+
+.form-container a:hover {
+text-decoration: underline;
+}
+
+/* Ensure full width of input and form alignment */
+.form-container form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
 
 
 
@@ -847,6 +877,7 @@ h2 {
 /* ----------------   Pages ------------------------ */
 
 .pagination {
+    font-family: "Abel";
     display: flex;
     justify-content: center;
     align-items: center;  
@@ -860,53 +891,28 @@ h2 {
 
 .step-links a, .step-links span {
     padding: 10px 20px;
-    margin: 0 5px;
+    margin: 0 -5px;
     text-decoration: none;
-    border-radius: 25px; /* Fully rounded corners */
     font-weight: bold;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 20px;
 }
 
-.step-links a {
-    background-color: #f4f4f4;
-    color: #dd2630;
-    border: 2px solid #dd2630; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.step-links a:hover {
-    background-color: #dd2630;
-    color: #fff;
-}
-
-.step-links span.current {
-    background-color: #dd2630;
-    color: #333;
-    border: 2px solid #dd2630;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    top: 2px;
-}
-
-.step-links span.disabled {
-    padding: 10px 20px;
-    margin: 0 5px;
-    color: #ddd;
-    border: 2px solid #ddd;
-    background-color: #f4f4f4;
-}
-
-.step-links a, .step-links span {
-    cursor: pointer;
-}
-
-.step-links a:focus, .step-links a:active {
-    outline: none;
-    background-color: #d14160;
-    color: #fff;
-}
-
+.pagination-icon {
+    width: 30px; /* Default width */
+    height: 30px; /* Default height */
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+  }
+  
+  .pagination-icon:hover {
+    transform: scale(1.1); /* Optional: slight zoom effect on hover */
+  }
+  
+  .pagination-icon.large {
+    width: 30px; /* Larger version */
+    height: 30px;
+  }
+  
 
 
   /* ---------------- Footer Styling ---------------- */

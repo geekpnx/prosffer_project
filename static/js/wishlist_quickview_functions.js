@@ -194,7 +194,7 @@ function saveWishListToDatabase() {
         contentType: 'application/json',
         success: function(response) {
             console.log("Wishlist saved successfully:", response);
-            alert("Wishlist has been saved to your profile!");  // Optional user feedback
+            alert("Product items have been saved successfully to the wishlist!");  // Optional user feedback
         },
         error: function(xhr, status, error) {
             console.error("Error saving wishlist:", error);
@@ -208,8 +208,17 @@ document.getElementById('save-wishlist-btn').addEventListener('click', function(
     if (userIsLoggedIn) {  // Ensure you check for authentication in JavaScript
         saveWishListToDatabase();  // Save the wishlist
     } else {
-        alert("You need to log in to save your wishlist.");
+        alert("To save your product items to wishlist, you need to login");
     }
 });
 
+
+
+document.getElementById('goto-wishlist-btn').addEventListener('click', function() {
+    if (userIsLoggedIn) {
+        window.location.href = wishlistUrl;
+    } else {
+        alert("To GO to your wishlist, you need to login");
+    }
+});
 

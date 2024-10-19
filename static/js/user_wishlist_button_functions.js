@@ -58,19 +58,30 @@ document.getElementById("user-icon-btn").addEventListener("click", function(even
     document.getElementById('wishlist-content').style.display = 'none';
 });
 
-// ---------------- Close both dropdowns when clicking outside ----------------
+// ---------------- Close Wishlist dropdowns when clicking outside ----------------
 
 document.addEventListener('click', function(event) {
     const wishlistContent = document.getElementById('wishlist-content');
-    const userDropdown = document.getElementById("user-dropdown-content");
-
+    
     // Close the wishlist if clicking outside of it
     if (wishlistContent.style.display === 'block' && !event.target.closest('#wishlist-btn')) {
         wishlistContent.style.display = 'none'; // Hide the wishlist
     }
+
+
+});
+
+
+// ---------------- Close User dropdowns when clicking outside ----------------
+
+document.addEventListener('click', function(event) {
+    const userDropdown = document.getElementById("user-dropdown-content");
 
     // Close the user dropdown if clicking outside of it
     if (userDropdown.classList.contains('show') && !event.target.closest('#user-icon-btn')) {
         userDropdown.classList.remove('show'); // Hide the user dropdown
     }
 });
+
+
+

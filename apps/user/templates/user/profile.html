@@ -114,6 +114,8 @@
         <!-- User Dropdown Menu -->
         <div class="user-dropdown-content" id="user-dropdown-content">
           {% if user.is_authenticated %}
+            <p>Hi, {{ user.first_name }}</p> <!-- Display the user's first name -->
+            <hr class="divider">
             <a href="{% url 'user-urls:profile' %}">Profile</a>
             <a href="{% url 'user-urls:logout' %}">Logout</a>
           {% else %}
