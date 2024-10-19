@@ -153,7 +153,7 @@ def save_wishlist(request):
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
-#------------------  Achraf ------------------------------
+#------------------  Download to PDF ------------------------------
 
 def download_wishlist_pdf(request):
     if not request.user.is_authenticated:
