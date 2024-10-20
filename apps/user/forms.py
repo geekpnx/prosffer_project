@@ -15,9 +15,7 @@ class UserProfileForm(forms.ModelForm):
         model = Consumer
         fields = ['date_of_birth', 'address', 'phone_number', 'profile_image']
 
-        # widgets = {
-        #     'date_of_birth': forms.DateInput(attrs={'class': 'datepicker'}),
-        # }
+
         widgets = {
             'date_of_birth': forms.DateInput(
                 attrs={
@@ -26,4 +24,10 @@ class UserProfileForm(forms.ModelForm):
                     'class': 'datepicker',
                 }
             ),
+            'profile_image': forms.FileInput(attrs={'id': 'fileUpload', 'accept': 'image/*', 'style': 'display: none;'}),  # Custom file input
         }
+
+        def __init__(self, *args, **kwargs):
+            super(UserProfileForm, self).__init__(*args, **kwargs)
+            # Remove the clear checkbox for profile_image
+            self.fields['profile_image'].widget.clear_checkbox_label = ''

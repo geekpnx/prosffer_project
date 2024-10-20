@@ -15,9 +15,21 @@ def view_edit_profile_view(request):
         user_form = UserForm(request.POST, instance=user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=consumer)
 
+        # Handle form submission and toggle for profile image
         if user_form.is_valid() and profile_form.is_valid():
+            # Check the value of the hidden field 'profile_image_status'
+            profile_image_status = request.POST.get('profile_image_status')
+
+            if profile_image_status == 'off':
+                # If the toggle is off, remove the profile image
+                if consumer.profile_image:
+                    consumer.profile_image.delete()  # Delete the current image file
+                consumer.profile_image = None  # Set profile image to None
+
+            # Save user and profile forms
             user_form.save()
             profile_form.save()
+
             messages.success(request, 'Profile updated successfully.')
             return redirect('user-urls:profile')  # Redirect to the same page after successful update
 

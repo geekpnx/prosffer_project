@@ -2,6 +2,34 @@ let wishList = [];
 let totalPrice = 0;
 let totalItems = 0; // For tracking total items
 
+
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+function saveWishlist() {
+    const csrfToken = getCSRFToken();
+    fetch('/wishlist/save/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,  // Include CSRF token here
+        },
+        body: JSON.stringify({
+            products: wishList
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Wishlist saved successfully') {
+            alert('All product items saved successfully into your wishlist!');
+        } else {
+            alert('There was an error saving your wishlist. Please try again.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 // Load wishlist from localStorage on page load
 document.addEventListener("DOMContentLoaded", function() {
     const storedWishList = localStorage.getItem('wishlist');
@@ -15,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
         updateWishList(); // Update the UI with the stored wishlist
     }
 });
-
 
 // Function to update quantity with a lower limit of 1
 function updateQuantity(productId, amount) {
@@ -31,8 +58,6 @@ function updateQuantity(productId, amount) {
         saveWishListToLocal(); // Save to local storage after update
     }
 }
-
-
 
 // Function to update the wishlist dropdown
 function updateWishList() {
@@ -116,7 +141,6 @@ function saveWishListToLocal() {
     localStorage.setItem('wishlist', JSON.stringify(wishList));
 }
 
-
 // Function to add a product to the wishlist
 function addToList(productId, storeName, productName, productPrice, productCurrency, productImage) {
     const existingItem = wishList.find(item => item.id === productId);
@@ -128,7 +152,8 @@ function addToList(productId, storeName, productName, productPrice, productCurre
             price: productPrice, 
             currency: productCurrency, 
             image: productImage, 
-            quantity: 1 });
+            quantity: 1 
+        });
 
         totalPrice += productPrice; // Update total Price
     } else {
@@ -139,8 +164,6 @@ function addToList(productId, storeName, productName, productPrice, productCurre
     updateWishList();
     saveWishListToLocal(); // Save to local storage
 }
-
-
 
 // Function to remove a product from the wishlist
 function removeFromList(productId) {
@@ -166,53 +189,15 @@ document.querySelectorAll('.add-to-wishlist').forEach(button => {
     });
 });
 
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-// Function to save wishlist to the server
-function saveWishListToDatabase() {
-    $.ajax({
-        url: saveWishlistUrl,  // Use the dynamically generated URL from Django
-        type: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
-        },
-        data: JSON.stringify(wishList),  // Send the wishlist data as JSON
-        contentType: 'application/json',
-        success: function(response) {
-            console.log("Wishlist saved successfully:", response);
-            alert("Product items have been saved successfully to the wishlist!");  // Optional user feedback
-        },
-        error: function(xhr, status, error) {
-            console.error("Error saving wishlist:", error);
-            alert("There was an error saving your wishlist. Please try again.");  // Optional user feedback
-        }
-    });
-}
 
 // Attach save button event listener (assuming you have a button with id 'save-wishlist-btn')
 document.getElementById('save-wishlist-btn').addEventListener('click', function() {
     if (userIsLoggedIn) {  // Ensure you check for authentication in JavaScript
-        saveWishListToDatabase();  // Save the wishlist
+        saveWishlist();  // Use the new save function
     } else {
         alert("To save your product items to wishlist, you need to login");
     }
 });
-
-
 
 document.getElementById('goto-wishlist-btn').addEventListener('click', function() {
     if (userIsLoggedIn) {
@@ -221,4 +206,3 @@ document.getElementById('goto-wishlist-btn').addEventListener('click', function(
         alert("To GO to your wishlist, you need to login");
     }
 });
-

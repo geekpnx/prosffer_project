@@ -15,7 +15,7 @@ from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.platypus import Table, TableStyle
 from datetime import datetime
-from .models import WishList  # Assuming WishList is in the current app
+from .models import WishList, WishListProduct # Assuming WishList is in the current app
 
 # Helper function to calculate total price
 def calculate_wishlist_total(products):
@@ -135,22 +135,19 @@ def wishlist_view(request):
 @csrf_exempt
 def save_wishlist(request):
     if request.method == 'POST':
-        user = request.user if request.user.is_authenticated else None
+        wishlist, _ = WishList.objects.get_or_create(consumer=request.user.consumer)
         data = json.loads(request.body)
 
-        if user:
-            consumer = Consumer.objects.get(user=user)  # Get the Consumer object
-            wishlist, created = WishList.objects.get_or_create(consumer=consumer)
-            wishlist.products.clear()
+        # Clear existing products and add new ones with quantities
+        WishListProduct.objects.filter(wishlist=wishlist).delete()
+        for product_data in data['products']:
+            product = Product.objects.get(id=product_data['id'])
+            quantity = product_data.get('quantity', 1)  # Default to 1 if not provided
+            WishListProduct.objects.create(wishlist=wishlist, product=product, quantity=quantity)
 
-            for item_data in data:
-                product = get_object_or_404(Product, id=item_data['id'])
-                wishlist.products.add(product)
+        return JsonResponse({'message': 'Wishlist saved successfully'})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-            wishlist.save()
-            return JsonResponse({'status': 'success'}, status=200)
-
-    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 #------------------  Download to PDF ------------------------------
@@ -165,15 +162,12 @@ def download_wishlist_pdf(request):
     except WishList.DoesNotExist:
         return HttpResponse("No wishlist found", status=404)
 
-    wishlist_items = (
-        wishlist.products.all()
-    )  # Products is a ManyToManyField, so no quantity directly
+    # Get the wishlist items with quantities using the through model
+    wishlist_items = WishListProduct.objects.filter(wishlist=wishlist)
 
-    # You could calculate a total price if needed (assuming prices are stored in the Product model)
-    total_price = sum(
-        item.price for item in wishlist_items
-    )  # Assuming product has a price field
-    total_items = wishlist_items.count()
+    # Calculate total price and total items (with quantities)
+    total_price = sum(item.product.price * item.quantity for item in wishlist_items)
+    total_items = sum(item.quantity for item in wishlist_items)
 
     # Set up response to download as a PDF
     response = HttpResponse(content_type="application/pdf")
@@ -185,7 +179,8 @@ def download_wishlist_pdf(request):
     p.drawImage(
         "static/images/logo/prosffer_logo_tags_small200x61px.jpg", 40, 750, width=150, height=46
     )
-
+    # Get the user's first name
+    user_first_name = request.user.first_name
     # Add current date and time to the right corner
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     p.setFont("Helvetica-Bold", 10)
@@ -195,27 +190,36 @@ def download_wishlist_pdf(request):
     p.setFont("Helvetica", 16)
     p.setFillColorRGB(0.2, 0.2, 0.2)
     p.drawCentredString(300, 700, "Thank you for visiting prosffer!")
-    p.drawCentredString(300, 670, f"Your wishlist")
+    # Add the user's name to the title
+    p.drawCentredString(300, 670, f"Your wishlist, {user_first_name}")
 
-    # Create table data
-    data = [["Product", "Price"]]  # No quantity field in current model
+    # Create table data with product name, store, quantity, and price
+    data = [["Product", "Store", "Quantity", "Price"]]  # Updated table headers
     for item in wishlist_items:
-        data.append(
-            [item.name, f"€{item.price:.2f}"]
-        )  # Assuming 'name' and 'price' exist in Product
+        # Take the first three words of the product name
+        product_name = ' '.join(item.product.name.split()[:3])  # Get the first 3 words
+
+        data.append([
+            product_name,  # Product Name
+            item.product.store,  # Store Name
+            f"{item.quantity}",  # Quantity
+            f"€{item.product.price * item.quantity:.2f}"  # Price
+        ])
 
     # Create the table with more width
-    table = Table(data, colWidths=[300, 100])  # Adjust the column widths
+    table = Table(data, colWidths=[200, 100, 80, 100])  # Adjusted column widths
 
     # Style the table
     table.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.Color(0.1, 0.1, 0.1)),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),  # Horizontal alignment
+                ("VALIGN", (0, 0), (-1, 0), "MIDDLE"),  # Vertical alignment for header
                 ("FONTNAME", (0, 1), (-1, -1), "Helvetica-Bold"),
-                ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
+                ("BOTTOMPADDING", (0, 0), (-1, 0), 12),  # Padding for header
+                ("TOPPADDING", (0, 0), (-1, 0), 12),  # Add top padding for header
                 ("BACKGROUND", (0, 1), (-1, -1), colors.white),
                 ("GRID", (0, 0), (-1, -1), 1, colors.darkgray),  # Add borders around cells
                 ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
@@ -233,8 +237,8 @@ def download_wishlist_pdf(request):
     # Draw the table on the PDF
     table.wrapOn(p, 400, 600)
     table.drawOn(
-        p, (A4[0] - table_width) / 2, y_position
-    )  # Center horizontally and set Y position
+        p, (A4[0] - table_width) / 2, y_position  # Center horizontally and set Y position
+    )
 
     # Bold Total Items and Total Price and center it
     p.setFont("Helvetica-Bold", 12)
@@ -250,5 +254,4 @@ def download_wishlist_pdf(request):
     p.save()
 
     return response
-
 

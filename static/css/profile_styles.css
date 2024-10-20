@@ -847,18 +847,29 @@ input, textarea {
     z-index: 1; /* Ensure it's above other content */
 }
 
-/* Toggle Switch */
+/* Align "ON | OFF" with the switch */
+.toggle-profile-image {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px; /* Space between text and switch */
+    width: 50%;
+}
+
+.toggle-label {
+    font-weight: bold;
+    color: #424242; /* Change text color if needed */
+}
+
+
+/* Custom styles for the toggle switch */
 .switch {
     position: relative;
-    display: inline-block;
-    width: 34px;
-    height: 20px;
+    width: 50px;
+    height: 24px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none;
 }
 
 .slider {
@@ -870,33 +881,57 @@ input, textarea {
     bottom: 0;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: 34px;
+    border-radius: 24px;
+    width: 45px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
-    left: 2px;
-    bottom: 2px;
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #424242;
+    width: 45px;
 }
 
 input:checked + .slider:before {
-    transform: translateX(14px);
+    transform: translateX(20px);
+    
 }
 
-.slider.round {
-    border-radius: 34px;
+
+/* Custom file upload button */
+.custom-file-upload {
+    margin-top: 10px;
 }
 
+.custom-upload-button {
+    display: inline-block;
+    background-color: #424242;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit; /* Use the existing CSS font */
+    font-size: inherit;   /* Use the existing font size */
+}
+
+.custom-upload-button:hover {
+    background-color: #484646; /* Darker hover effect */
+}
+
+/* Hide default file input */
+#fileUpload {
+    display: none;
+}
 
 /* Footer Styling */
 footer {

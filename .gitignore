@@ -6,3 +6,4 @@ code_comparison.css
 code_comparison.py
 code_comparison.js
 code_comparison.html
+.mypy_cache/
