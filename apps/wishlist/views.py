@@ -183,19 +183,19 @@ def download_wishlist_pdf(request):
 
     # Add a logo to the left
     p.drawImage(
-        "static/images/logo/prosffer_logo_tags.png", 40, 750, width=100, height=50
+        "static/images/logo/prosffer_logo_tags_small200x61px.jpg", 40, 750, width=150, height=46
     )
 
     # Add current date and time to the right corner
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    p.setFont("Helvetica", 10)
+    p.setFont("Helvetica-Bold", 10)
     p.drawRightString(550, 760, f"Date: {now}")
 
     # Set title font and align title to the middle
-    p.setFont("Helvetica-Bold", 16)
+    p.setFont("Helvetica", 16)
     p.setFillColorRGB(0.2, 0.2, 0.2)
-    p.drawCentredString(300, 700, "Thank you for visiting our website")
-    p.drawCentredString(300, 670, "Your Wishlist")
+    p.drawCentredString(300, 700, "Thank you for visiting prosffer!")
+    p.drawCentredString(300, 670, f"Your wishlist")
 
     # Create table data
     data = [["Product", "Price"]]  # No quantity field in current model
@@ -211,13 +211,13 @@ def download_wishlist_pdf(request):
     table.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, 0), colors.red),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
                 ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("FONTNAME", (0, 1), (-1, -1), "Helvetica-Bold"),
                 ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
-                ("BACKGROUND", (0, 1), (-1, -1), colors.lightgreen),
-                ("GRID", (0, 0), (-1, -1), 1, colors.black),  # Add borders around cells
+                ("BACKGROUND", (0, 1), (-1, -1), colors.white),
+                ("GRID", (0, 0), (-1, -1), 1, colors.darkgray),  # Add borders around cells
                 ("FONTNAME", (0, 1), (-1, -1), "Helvetica"),
             ]
         )
