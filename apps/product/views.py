@@ -40,8 +40,8 @@ class ProductListView(ListView):
             context = super().get_context_data(**kwargs)
 
             # Fetch distinct categories from the Product model
-            categories = Product.objects.values_list('category', flat=True).distinct()
-            context['categories'] = categories
+            context['categories'] = Product.objects.values_list('category', flat=True).distinct()
+
 
             # Add pagination-related context
             context['is_paginated'] = context['paginator'].num_pages > 1 if 'paginator' in context else False

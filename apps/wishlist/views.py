@@ -168,10 +168,11 @@ def download_wishlist_pdf(request):
     # Calculate total price and total items (with quantities)
     total_price = sum(item.product.price * item.quantity for item in wishlist_items)
     total_items = sum(item.quantity for item in wishlist_items)
-
+    # Get the user's first name
+    user_first_name = request.user.first_name
     # Set up response to download as a PDF
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="My-Wishlist.pdf"'
+    response["Content-Disposition"] = f'attachment; filename="{user_first_name}-Wishlist.pdf"'
 
     p = canvas.Canvas(response, pagesize=A4)
 
@@ -180,7 +181,7 @@ def download_wishlist_pdf(request):
         "static/images/logo/prosffer_logo_tags_small200x61px.jpg", 40, 750, width=150, height=46
     )
     # Get the user's first name
-    user_first_name = request.user.first_name
+    # user_first_name = request.user.first_name
     # Add current date and time to the right corner
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     p.setFont("Helvetica-Bold", 10)

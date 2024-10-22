@@ -237,10 +237,10 @@
         <div class="pagination">
           <span class="step-links">
             {% if page_obj.has_previous %}
-              <a href="?page=1{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">
+              <a href="?page=1&category={{ request.GET.category|urlencode }}&product_name={{ request.GET.product_name|urlencode }}">
                 <img class="pagination-icon" src="{% static 'images/icons/first_icon.svg' %}" alt="First">
               </a>
-              <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">
+              <a href="?page={{ page_obj.previous_page_number }}&category={{ request.GET.category|urlencode }}&product_name={{ request.GET.product_name|urlencode }}">
                 <img class="pagination-icon" src="{% static 'images/icons/previous_icon.svg' %}" alt="Previous">
               </a>
             {% endif %}
@@ -250,10 +250,10 @@
             </span>
 
             {% if page_obj.has_next %}
-              <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">
+              <a href="?page={{ page_obj.next_page_number }}&category={{ request.GET.category|urlencode }}&product_name={{ request.GET.product_name|urlencode }}">
                 <img class="pagination-icon" src="{% static 'images/icons/next_icon.svg' %}" alt="Next">
               </a>
-              <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&product_name={{ search_query }}{% endif %}{% if search_category %}&category={{ search_category }}{% endif %}">
+              <a href="?page={{ page_obj.paginator.num_pages }}&category={{ request.GET.category|urlencode }}&product_name={{ request.GET.product_name|urlencode }}">
                 <img class="pagination-icon" src="{% static 'images/icons/last_icon.svg' %}" alt="Last">
               </a>
             {% endif %}
