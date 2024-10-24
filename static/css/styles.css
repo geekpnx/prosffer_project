@@ -176,30 +176,33 @@ h2 {
 
 /* --------- Product card ------- */
 
-.product-card {
-    position: relative; /* Make the product card a positioned container */
-    width: 300px; /* Fixed width */
-    height: 700px; /* Fixed height */
-    object-fit: contain; 
-    background-color: #ffffff; /* Card background */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 20px; /* Rounded corners */
-    padding: 35px 30px 0px 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: transform 0.2s; /* Animation effect */
-    overflow: hidden; /* Ensures elements don’t overflow */
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
+.highlight {
+    font-weight: bold;
+    color: #dd2630;
 }
 
-
-
+.product-card {
+    position: relative;
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 
 .product-card h3 {
     font-size: 20px;
-    font-weight: bolder;
-    padding: 0 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15;
+    margin-bottom: 40px;
 }
 
 .product-item {
@@ -233,38 +236,53 @@ h2 {
     transform: scale(1.05); /* Slight zoom on hover */
 }
 
+/* Product Details Body */
 .product-details {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Aligns content to the left */
-    margin-top: 10px;
-    padding-left: 10px;
+    align-items: flex-start; /* Align elements to the left */
+    gap: 10px;
+    margin-bottom: 20px;
+    height: 100%; /* Ensure the height of the container spans the available space */
 }
 
 
 
+/* Scrollable Details */
+.details-scrollable {
+    max-height: 200px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto;  /* Enable vertical scrolling if the content exceeds the height */
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+}
 
 
 /* Store Name Styles */
-.product-details .store-name {
+.store-name {
     font-weight:500;
     font-size: 20px; /* Adjust size as needed */
-    margin-bottom: 5px;
+    text-align: left; /* Left-align text */
+    width: 100%; /* Make it span the full width */
+    margin-bottom: 10px;
 }
 
 
 /* Product Description Styles */
-.product-details .product-desc {
+.product-desc {
     font-weight: 500;
     font-size: 15px;
     color: #777777;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    text-align: left; /* Left-align text */
+    width: 100%; /* Make it span the full width */
+    margin-bottom: 10px;
 }
 
 
 /* Price Styles */
-.product-details .price {
+.price {
     background-color: #dd2630;
     color: white;
     padding: 5px 10px;
@@ -272,6 +290,8 @@ h2 {
     font-weight: bold;
     border-radius: 5px;
     margin-top: 5px;
+    text-align: center; /* Left-align text */
+    width: 100%; /* Make it span the full width */
 }
 
 .product-item {
@@ -301,6 +321,14 @@ h2 {
     position: relative;
 }
 
+/* Footer with Buttons */
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: auto;
+}
 
 .view-button, 
 .add-to-wishlist {
@@ -315,10 +343,14 @@ h2 {
     cursor: pointer;
 }
 
-.view-button {
-    width: 42px;
-    height: 42px;
+.view-button img,
+.add-to-wishlist img {
+    width: 100%;
+    height: auto;
+}
 
+.product-card:hover {
+    transform: scale(1.05);
 }
 
 
@@ -331,11 +363,11 @@ h2 {
     object-fit: contain;
     display: block;
     padding: 0;
-    margin-top: 30px;
+    margin-top: -10px;
 }
 
 .add-to-wishlist img {
-    margin-top: 22px;
+    margin-top: -20px;
 }
 
 

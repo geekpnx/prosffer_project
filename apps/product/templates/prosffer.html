@@ -205,40 +205,44 @@
 <div id="product-list">
     {% if products %}
     <div class="slogan">
-      <h2>Proactively Surf for Best Offers</h2>
+      <h2>Proactively Surf for <span class="highlight">Best</span> Offers</h2>
     </div>
     <div class="product-comparison">
       {% for product in products %}
       <div class="product-card">
-          <h3>{{ product.name }}</h3>
-          <div class="product-details">
-              <img src="{{ product.image }}" alt="{{ product.name }}" class="product-thumbnail" />
-              <span class="store-name">{{ product.store }}</span>
-              <span class="product-desc">{{ product.description }}</span>
-              <span class="price">{{ product.price }} {{ product.currency }}</span>
-              <div class="button-container">
-                <a href="{{ product.link }}" target="_blank" class="view-button">
-                    <img src="{% static 'images/icons/view_icon.svg' %}" alt="View Icon" />
-                </a>
-                <button
-                    class="add-to-wishlist"
-                    data-product-id="{{ product.id }}"
-                    data-store-name="{{ product.store }}"
-                    data-product-name="{{ product.name }}"
-                    data-product-price="{{ product.price }}"
-                    data-product-currency="{{ product.currency }}"
-                    data-product-image="{{ product.image }}"
-                >
-                    <img
-                      src="{% static 'images/icons/add_icon.svg' %}"
-                      alt="Add Icon"
-                    />
-                </button>
-              </div>
+        <!-- Product Name in Header -->
+        <h3>{{ product.name }}</h3>
+      
+        <!-- Product Details in Body -->
+        <div class="product-details">
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="product-thumbnail" />
+            <div class="details-scrollable">
+                <span class="store-name">{{ product.store }}</span>
+                <span class="product-desc">{{ product.description }}</span>
+                <span class="price">{{ product.price }} {{ product.currency }}</span>
             </div>
-          </div>
+        </div>
+      
+        <!-- Footer Section with Buttons -->
+        <div class="product-footer">
+            <a href="{{ product.link }}" target="_blank" class="view-button">
+                <img src="{% static 'images/icons/view_icon.svg' %}" alt="View Icon" />
+            </a>
+            <button
+                class="add-to-wishlist"
+                data-product-id="{{ product.id }}"
+                data-store-name="{{ product.store }}"
+                data-product-name="{{ product.name }}"
+                data-product-price="{{ product.price }}"
+                data-product-currency="{{ product.currency }}"
+                data-product-image="{{ product.image }}"
+            >
+                <img src="{% static 'images/icons/add_icon.svg' %}" alt="Add Icon" />
+            </button>
+        </div>
+      </div>
         {% endfor %}
-    </div>
+      </div>
       {% if is_paginated %}
         <div class="pagination">
           <span class="step-links">
