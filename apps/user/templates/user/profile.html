@@ -25,10 +25,9 @@
 <body>
     <script>
         const userIsLoggedIn = {{ user.is_authenticated|yesno:"true,false" }};
-      </script>
-      <script>
         const saveWishlistUrl = "{% url 'wishlist-urls:save_wishlist' %}";
-       </script>
+        var wishlistUrl = '{% url 'wishlist-urls:wishlist' %}';
+    </script>
     <header>
         <div class="logo">
             <a href="{% url 'product-urls:product-list' %}">
@@ -139,35 +138,44 @@
           <!-- Display total price -->
         </button>
         <div class="wishlist-content" id="wishlist-content">
-          <h4>Wish List</h4>
-          <table id="wishlist-items">
-              <thead>
-                  <tr>
-                      <th>Image</th>
-                      <th>Store</th>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Actions</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <div id="wishlist-items-container">
-                  <table id="wishlist-items">
-                    
-                  <!-- Wishlist items will be dynamically added here -->
-              </tbody>
-          </table>
-          <p>
-            <strong>Total Price:</strong>
-            <span id="total-price-display">0.00 €</span>
-          </p>
-          <button id="save-wishlist-btn">Save to Wishlist</button>
-          <button id="goto-wishlist-btn" onclick="location.href='{% url 'wishlist-urls:wishlist' %}'">GO to Wishlist</button>
-        </div>
-      </div>
-    </div>
-
+            <div class="wishlist-header">
+                <h4>Wishlist</h4>
+            </div>
+        
+            <div class="wishlist-body" id="wishlist-body">
+                <table id="wishlist-items">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Store</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="wishlist-items-container">
+                        <!-- Wishlist items will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="wishlist-footer">
+                <!-- Total Price section -->
+                <div class="total-price-section">
+                    <strong>Total Price:</strong> <span id="total-price-display">0.00 €</span>
+                </div>
+                
+                <!-- Buttons at the bottom, horizontally aligned -->
+                <!-- New wrapper around the buttons -->
+                <div class="wishlist-buttons-wrapper">
+                  <div class="wishlist-buttons">
+                      <button id="save-wishlist-btn">Save to Wishlist</button>
+                      <button id="goto-wishlist-btn">Go to Wishlist</button>
+                  </div>
+                </div>
+            </div>
+          </div>
     </header>
 
     <div class="profile-container">

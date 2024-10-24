@@ -13,11 +13,7 @@
   <body>
     <script>
       const userIsLoggedIn = {{ user.is_authenticated|yesno:"true,false" }};
-    </script>
-    <script>
       const saveWishlistUrl = "{% url 'wishlist-urls:save_wishlist' %}";
-     </script>
-    <script>
       var wishlistUrl = '{% url 'wishlist-urls:wishlist' %}';
     </script>
     <!-- Header Section -->
