@@ -227,6 +227,7 @@
         <div class="product-footer">
             <a href="{{ product.link }}" target="_blank" class="view-button">
                 <img src="{% static 'images/icons/view_icon.svg' %}" alt="View Icon" />
+                <span class="tooltip-text">See in Store</span>
             </a>
             <button
                 class="add-to-wishlist"
@@ -238,6 +239,7 @@
                 data-product-image="{{ product.image }}"
             >
                 <img src="{% static 'images/icons/add_icon.svg' %}" alt="Add Icon" />
+                <span class="tooltip-text">Add to Wishlist</span>
             </button>
         </div>
       </div>

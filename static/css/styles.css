@@ -194,6 +194,7 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
 }
 
 
@@ -297,6 +298,7 @@ h2 {
 .product-item {
     border-bottom: 1px solid #ddd; /* Divider for items */
     padding: 10px 0; /* Spacing around items */
+    
 }
 
 .product-item:last-child {
@@ -332,8 +334,8 @@ h2 {
 
 .view-button, 
 .add-to-wishlist {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -341,35 +343,105 @@ h2 {
     background-color: transparent;
     border: none;
     cursor: pointer;
-}
-
-.view-button img,
-.add-to-wishlist img {
-    width: 100%;
-    height: auto;
-}
-
-.product-card:hover {
-    transform: scale(1.05);
+    
 }
 
 
-/* ----------- Wish List ------------ */
+/* General tooltip styling */
+.view-button, .add-to-wishlist {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+}
 
-.view-button img, 
-.add-to-wishlist img {
+/* Tooltip text styles */
+.tooltip-text {
+    visibility: hidden; /* Hidden by default */
+    width: 120px;
+    background-color: #424242;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 99999; /* Ensure it's above other elements */
+    bottom: 180%; /* Position it above the button */
+    opacity: 0; /* Invisible initially */
+    transition: opacity 0.3s;
+}
+
+/* Arrow on the tooltip pointing upwards */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* Position arrow at the top of the tooltip */
+    left: 50%;
+    margin-left: -5px; /* Center the arrow */
+    border-width: 5px;
+    border-style: solid;
+    border-color: #424242 transparent transparent transparent; /* Upward arrow */
+}
+
+/* Show tooltip on hover */
+.view-button:hover .tooltip-text {
+    font-family: inherit;
+    visibility: visible;
+    opacity: 1; /* Show the tooltip */
+    margin-left: -35px; /* Center the tooltip */
+    z-index: 10001; /* Ensure the tooltip has a higher z-index */
+}
+
+/* Show tooltip on hover */
+.add-to-wishlist:hover .tooltip-text {
+    font-family: "Abel";
+    font-size: 16px;
+    visibility: visible;
+    opacity: 1; /* Show the tooltip */
+    bottom: 200%;
+    margin-left: -70px; /* Center the tooltip */
+    z-index: 99999; /* Ensure the tooltip has a higher z-index */
+}
+
+/* Ensure parent elements have positioning */
+.view-button, .add-to-wishlist {
+    position: relative; /* Needed to position the tooltip correctly */
+}
+
+
+.view-button img {
     width: 100%;  /* Ensure both SVGs scale to the full size */
     height: 100%;
     object-fit: contain;
     display: block;
     padding: 0;
     margin-top: -10px;
+    margin-left: 10px;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
 }
+
 
 .add-to-wishlist img {
-    margin-top: -20px;
+
+    width: 100%;  /* Ensure both SVGs scale to the full size */
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    padding: 0;
+    margin-top: -30px;
+    margin-left: -10px;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
 }
 
+
+
+
+.view-button:hover img, 
+.add-to-wishlist:hover img {
+    transform: scale(1.2); /* Optional: slight zoom effect on hover */
+}
+
+
+/* ----------- Wish List ------------ */
 
 /* Wishlist Dropdown Styles */
 .wishlist-dropdown {
@@ -502,10 +574,10 @@ h2 {
     color: white;
     font-weight: bolder;
     border-radius: 0px 0px 5px 5px;
-    height: 30px;
+    height: 32px;
     max-width: 100%;
     margin-bottom: 10px;
-    text-align: right;
+    text-align: center;
     width: 100%; /* Ensure it spans the full width */
     padding-top: 4px;
     padding-right: 20px;
@@ -719,7 +791,7 @@ h2 {
     padding: 10px 20px;
     margin-left: 15px;
     font-size: 14px;
-    background-color: #dd2630; /* Customize the color */
+    background-color: #424242; /* Customize the color */
     color: white;
     border: none;
     border-radius: 5px;
@@ -732,7 +804,7 @@ h2 {
     padding: 10px 20px;
     margin-right: 15px;
     font-size: 14px;
-    background-color: #dd2630; /* Customize the color */
+    background-color: #424242; /* Customize the color */
     color: white;
     border: none;
     border-radius: 5px;
@@ -741,7 +813,7 @@ h2 {
 
   
 #save-wishlist-btn:hover, #goto-wishlist-btn:hover {
-    background-color: #ac2329; /* Hover color */
+    background-color: #7a7a7a; /* Hover color */
 }
   
 #wishlist-content {
@@ -1046,7 +1118,7 @@ gap: 15px;
   }
   
   .pagination-icon:hover {
-    transform: scale(1.1); /* Optional: slight zoom effect on hover */
+    transform: scale(1.5); /* Optional: slight zoom effect on hover */
   }
   
   .pagination-icon.large {

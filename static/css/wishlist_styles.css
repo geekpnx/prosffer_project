@@ -162,7 +162,7 @@ h2, h3 {
 }
 
 .wishlist-full-footer p {
-  background-color: #353535;
+  background-color: #424242;
   color: #fff;
   font-size: 15px;
   padding: 10px 0px;
@@ -176,7 +176,7 @@ h2, h3 {
 .wishlist-full-footer button {
   font-family: inherit;
   flex-basis: 20%; /* Matches the width of the Actions column */
-  background-color: #353535;
+  background-color: #424242;
   border: none;
   color: white;
   padding: 10px 0px;
