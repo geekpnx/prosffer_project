@@ -11,7 +11,7 @@ from .models import Product
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'prosffer.html'
+    template_name = 'main.html'
     context_object_name = 'products'
     paginate_by = 12
 
@@ -77,12 +77,6 @@ def product_list_ajax(request):
     ]
 
     return JsonResponse({'products': products_data})
-
-
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'products/product_detail.html'
-    context_object_name = 'product'
 
 
 def product_search(request):

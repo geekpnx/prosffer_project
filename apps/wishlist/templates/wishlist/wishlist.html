@@ -1,196 +1,43 @@
+{% extends 'base_wishlist.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist</title>
-    <link rel="shortcut icon" href="{% static 'images/favcon/favicon-prosffer.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'css/wishlist_styles.css' %}">
+{% block title %}Wishlist{% endblock %}
 
-    <script>
-        function toggleEdit() {
-            const viewSection = document.getElementById('view-section');
-            const editSection = document.getElementById('edit-section');
-            if (viewSection.style.display === 'none') {
-                viewSection.style.display = 'block';
-                editSection.style.display = 'none';
-            } else {
-                viewSection.style.display = 'none';
-                editSection.style.display = 'block';
-            }
-        }
-    </script>
-</head>
-<body>
-    <script>
-        const userIsLoggedIn = {{ user.is_authenticated|yesno:"true,false" }};
-      </script>
-      <script>
-        const saveWishlistUrl = "{% url 'wishlist-urls:save_wishlist' %}";
-       </script>
-    <header>
-        <div class="logo">
-            <a href="{% url 'product-urls:product-list' %}">
-                <img
-                  src="{% static 'images/logo/prosffer_logo_tags.svg' %}"
-                  alt="Logo"
-                />
-            </a>
-        </div>
-        
-        
-          <div class="user-menu">
-            <div class="user_dropdown">
-                <button id="user-icon-btn" class="user-icon-btn">
-                    {% if request.user.is_authenticated %}
-                        {% if request.user.consumer.profile_image %}
-                            <img src="{{ request.user.consumer.profile_image.url }}" alt="User Profile Picture" class="user-icon">
-                        {% else %}
-                            <img src="{% static 'images/icons/user_icon.svg' %}" alt="Default User Icon" class="user-icon">
-                        {% endif %}
-                    {% else %}
-                        <img src="{% static 'images/icons/user_icon.svg' %}" alt="User Icon" class="user-icon">
-                    {% endif %}
-                </button>
-            </div>
-        </div>
+{% block content %}
 
-        <!-- Login Modal -->
-        <div id="loginModal" class="modal">
-          <div class="modal-content form-container">
-            <span class="close" id="closeLogin">&times;</span>
-            <h2>Login</h2>
-        
-            <div class="messages"></div>
-
-            <form method="POST" action="{% url 'user-urls:login' %}">
-              {% csrf_token %}
-              <label for="username">Username:</label>
-              <input type="text" name="username" id="username" required autocomplete="off">
-        
-              <label for="password">Password:</label>
-              <input type="password" name="password" id="password" required autocomplete="off">
-        
-              <button type="submit">Login</button>
-            </form>
-        
-            <p>Don't have an account? <a href="#" id="showSignUp">Sign up here</a></p>
-          </div>
-        </div>
-
-        <!-- Signup Modal -->
-        <div id="signupModal" class="modal">
-          <div class="modal-content">
-              <span class="close" id="closeSignup">&times;</span>
-              <div class="form-container">
-                  <h2>Sign Up</h2>
-
-                  <!-- Display messages if any -->
-                  <div class="messages"></div>
-
-                  <form method="POST" action="{% url 'user-urls:signup' %}">
-                      {% csrf_token %}
-              
-                      <label for="username">Username</label>
-                      <input type="text" id="username" name="username" required autocomplete="off">
-
-                      <label for="email">Email</label>
-                      <input type="email" id="email" name="email" required autocomplete="off">
-
-                      <label for="password1">Password</label>
-                      <input type="password" id="password1" name="password1" required autocomplete="off">
-
-                      <label for="password2">Confirm Password</label>
-                      <input type="password" id="password2" name="password2" required autocomplete="off">
-
-                      <button type="submit">Sign Up</button>
-                      <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
-                  </form>
-              </div>
-          </div>
-        </div>
-
-        <!-- User Dropdown Menu -->
-        <div class="user-dropdown-content" id="user-dropdown-content">
-          {% if user.is_authenticated %}
-            <p>Hi, {{ user.first_name }}</p> <!-- Display the user's first name -->
-            <hr class="divider">
-            <a href="{% url 'user-urls:profile' %}">Profile</a>
-            <a href="{% url 'user-urls:logout' %}">Logout</a>
-          {% else %}
-            <a href="#" id="loginBtn">Login</a> <!-- Keep as an anchor for the modal pop-up -->
-            <a href="#" id="signupBtn">Sign Up</a> <!-- Trigger Sign Up modal -->
-          {% endif %}
-        </div>
-      </div>
-
-
-      <!-- Wishlist Dropdown -->
-      <div class="wishlist-dropdown">
-        <button id="wishlist-btn" class="wishlist-btn">
-          <img
-            src="{% static 'images/icons/wishlist_icon.svg' %}"
-            alt="Wishlist Icon"
-            class="wishlist-icon"
-          />
-          <span id="total-price">0.00 €</span>
-          <span id="wishlist-count" style="display: none;">0</span>
-          <!-- Display total price -->
-        </button>
-        <div class="wishlist-dropdown-content" id="wishlist-content" style="display: none;">
-          <!-- Wishlist items will be dynamically added here -->
-        </div>
-
-      </div>
+  <div class="wishlist-body-con">
+    <!-- Wishlist Table show on the body  -->
+    <div class="wishlist-full-header">
+        {% if user.is_authenticated %}
+        <p>Your wishlist, {{ user.first_name }}</p> 
+        {% endif %}
+        <a href="{% url 'wishlist-urls:download_wishlist' %}" class="custom-download-btn">Download to (PDF)</a>
     </div>
-
-    </header>
-    <div class="wishlist-body-con">
-      <!-- Wishlist Table show on the body  -->
-      <div class="wishlist-full-header">
-          {% if user.is_authenticated %}
-          <p>Your wishlist, {{ user.first_name }}</p> 
-          {% endif %}
-          <a href="{% url 'wishlist-urls:download_wishlist' %}" class="custom-download-btn">Download to (PDF)</a>
-      </div>
-      
-      <table id="wishlist-items">
-          <thead>
-              <tr>
-                  <th>Image</th>
-                  <th>Store</th>
-                  <th>Product</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-              </tr>
-          </thead>
-          <tbody id="wishlist-items-container">
-              <!-- Wishlist items will be dynamically added here -->
-          </tbody>
-      </table>
-      
-      <div class="wishlist-full-footer">
-          <p>
-              <strong>Total Price:</strong>
-              <span id="total-price-display">0.00 €</span>
-          </p>
-          <button id="save-wishlist-btn" class="save-wishlist-btn">Save to Wishlist</button>
-      </div>
+    
+    <table id="wishlist-items">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Store</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="wishlist-items-container">
+            <!-- Wishlist items will be dynamically added here -->
+        </tbody>
+    </table>
+    
+    <div class="wishlist-full-footer">
+        <p>
+            <strong>Total Price:</strong>
+            <span id="total-price-display">0.00 €</span>
+        </p>
+        <button id="save-wishlist-btn" class="save-wishlist-btn">Save to Wishlist</button>
     </div>
+  </div>
 
-
-
-    <!-- External JS file -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'js/suggestions_functions.js' %}"></script>
-    <script src="{% static 'js/user_wishlist_button_functions.js' %}"></script>
-    <script src="{% static 'js/wishlist_quickview_functions.js' %}"></script>
-    <script src="{% static 'js/login_signup.js' %}"></script>
-    <footer>
-        <p>&copy; 2024 Prosffer made with ♡</p>
-    </footer>
-</body>
-</html>
+{% endblock %}

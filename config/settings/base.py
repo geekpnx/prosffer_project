@@ -21,6 +21,7 @@ CUSTOM_APPS = [
     "apps.product",
     "apps.core",
     "apps.wishlist",
+    "apps.main",
     # USER DEFINED APPS
     # "apps.name1",    # <-- your app name goes here
     # "apps.name2",    # <-- your app name goes here
@@ -53,7 +54,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "apps/core/templates",],  # Adds global templates folder
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -102,7 +103,7 @@ STATICFILES_DIRS = [
     ]
 
 # # In production, use STATIC_ROOT to collect static files
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 MEDIA_URL = '/media/'
