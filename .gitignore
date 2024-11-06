@@ -1,6 +1,7 @@
 .venv
 __pycache__/
 .env
+.env.prod
 .DS_Store
 code_comparison.css
 code_comparison.py
