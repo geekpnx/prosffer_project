@@ -3,7 +3,7 @@ import environs
 
 env = environs.Env()
 
-env.read_env(str(BASE_DIR / '.env'))
+env.read_env(str(BASE_DIR / '.env.prod'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('SECRET_KEY')
@@ -20,7 +20,7 @@ THIRD_PARTY_APPS = [
     # USER DEFINED APPS
 ]
 
-MIDDLEWARE = MIDDLEWARE + ["whitenose.middleware.WhiteNoiseMiddleware"]
+MIDDLEWARE = MIDDLEWARE + ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
 DATABASES = {
     "default": {
@@ -34,6 +34,7 @@ DATABASES = {
 }
 
 STATIC_ROOT = str(BASE_DIR /"staticfiles")
-STATICFILES_DIRS = (str(BASE_DIR / "static"),)
+STATICFILES_DIRS = (str(BASE_DIR / "static"),)  
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR / "media")

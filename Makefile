@@ -33,6 +33,9 @@ dev-shell-plus:
 
 #-------------------- Production -------------------
 
+prod-start:
+	python3 manage.py runserver --settings=config.settings.prod
+
 prod-install:
 	pip install -r requirements/prod.txt
 
