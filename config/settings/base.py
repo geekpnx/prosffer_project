@@ -13,6 +13,7 @@ DEFAULT_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
 ]
 
 CUSTOM_APPS = [
@@ -20,6 +21,7 @@ CUSTOM_APPS = [
     "apps.product",
     "apps.core",
     "apps.wishlist",
+    "apps.main",
     # USER DEFINED APPS
     # "apps.name1",    # <-- your app name goes here
     # "apps.name2",    # <-- your app name goes here
@@ -52,7 +54,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "apps/core/templates",],  # Adds global templates folder
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "CET"
 
 USE_I18N = True
 
@@ -96,7 +98,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
-#STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    ]
+
+# # In production, use STATIC_ROOT to collect static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

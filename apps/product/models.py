@@ -1,6 +1,8 @@
 from django.db import models
 from apps.core.constraints import STORE_NAMES
 # Create your models here.
+
+
 class Product(models.Model):
     store = models.CharField(max_length=30, choices=STORE_NAMES)
     name = models.CharField(max_length=255)

@@ -1,3 +1,91 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.generic import ListView, DetailView
+from django.db.models import Q
+
+from .models import Product
+
 
 # Create your views here.
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'main.html'
+    context_object_name = 'products'
+    paginate_by = 12
+
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        product_name = self.request.GET.get('product_name', '')
+        category = self.request.GET.get('category', '')
+
+        # Use regex for advanced filtering by product name and category
+        if product_name and category:
+            queryset = queryset.filter(
+                Q(name__iregex=r'\y{}\y'.format(product_name)) & 
+                Q(category__iregex=r'\y{}\y'.format(category))
+            ).order_by('price')
+        elif product_name:
+            queryset = queryset.filter(Q(name__iregex=r'\y{}\y'.format(product_name))).order_by('price')
+        elif category:
+            queryset = queryset.filter(Q(category__iregex=r'\y{}\y'.format(category))).order_by('price')
+
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+            # Get the default context data from the parent class
+            context = super().get_context_data(**kwargs)
+
+            # Fetch distinct categories from the Product model
+            context['categories'] = Product.objects.values_list('category', flat=True).distinct()
+
+
+            # Add pagination-related context
+            context['is_paginated'] = context['paginator'].num_pages > 1 if 'paginator' in context else False
+            context['page_obj'] = context.get('page_obj')
+            context['paginator'] = context.get('paginator')
+
+            # Pass the current search query to the context
+            context['search_query'] = self.request.GET.get('product_name', '')
+            context['search_category'] = self.request.GET.get('category', '')
+
+            return context
+        
+
+# AJAX-based product list view
+def product_list_ajax(request):
+    product_name = request.GET.get('product_name', '')
+    category = request.GET.get('category', '')
+
+    products = Product.objects.filter(
+        Q(name__icontains=product_name) & Q(category__icontains=category)
+    ).order_by('price')
+
+    products_data = [
+        {
+            'name': product.name,
+            'price': product.price,
+            'store': product.store,
+            'description': product.description,
+            'image': product.image.url,
+            'link': product.link,
+        }
+        for product in products
+    ]
+
+    return JsonResponse({'products': products_data})
+
+
+def product_search(request):
+    if 'q' in request.GET:
+        query = request.GET['q']
+        products = Product.objects.filter(name__icontains=query)[:10]  # Limit results for autocomplete
+        product_names = [product.name for product in products]
+        return JsonResponse(product_names, safe=False)
+    return JsonResponse([], safe=False)
+
+
+

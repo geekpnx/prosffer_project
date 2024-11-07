@@ -1,3 +1,5 @@
+#------------  Development ----------------
+
 start:
 	python3 manage.py runserver --settings=config.settings.dev
 
@@ -27,3 +29,30 @@ dev-startapp:
 
 dev-shell-plus:
 	python3 manage.py shell_plus --settings=config.settings.dev
+
+
+#-------------------- Production -------------------
+
+
+prod-install:
+	pip install -r requirements/prod.txt
+
+prod-m:
+	python3 manage.py migrate --settings=config.settings.prod
+
+prod-makem:
+	python3 manage.py makemigrations --settings=config.settings.prod
+
+prod-super:
+	python3 manage.py createsuperuser --settings=config.settings.prod
+
+prod-shell-plus:
+	python3 manage.py shell_plus --settings=config.settings.prod
+
+prod-collectstatic:
+	python3 manage.py collectstatic --settings=config.settings.prod
+
+prod-gunicorn:
+	gunicorn --env DJANGO_SETTINGS_MODULE=config.settings.prod --bind 0.0.0.0:8000 -c config/prod/prod.py --log-file -
+
+

@@ -1,3 +1,10 @@
 .venv
 __pycache__/
 .env
+.env.prod
+.DS_Store
+code_comparison.css
+code_comparison.py
+code_comparison.js
+code_comparison.html
+.mypy_cache/

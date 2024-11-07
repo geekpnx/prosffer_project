@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(https://design.penpot.app/internal/gfonts/font/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* General styles for the body */
+body {
+    font-family: 'Abel';
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* General container for forms */
+.form-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form labels and inputs */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures input fields fit within the container */
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: #e83a68;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c52751;
+}
+
+/* Align messages */
+.messages {
+    margin-bottom: 15px;
+    color: red;
+    font-weight: bold;
+}
+
+/* Links for navigation between login and signup */
+p {
+    text-align: center;
+}
+
+a {
+    color: #e83a68;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ensure full width of input and form alignment */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Consistent spacing between fields */
+}

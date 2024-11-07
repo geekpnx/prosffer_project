@@ -1,0 +1,1143 @@
+/* General styles */
+@font-face {
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(https://design.penpot.app/internal/gfonts/font/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+body {
+    font-family: 'Abel';
+    margin: 0;
+    padding: 0;
+    background-color: #e5e5e5;
+    margin-top: 200px; /* Adjust to give space for the fixed header */
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: center; /* Center the entire header content */
+    padding-top: -2%;
+    padding-bottom: 3%;
+    background-color: #f5f5f5;
+    width: 100%;
+    position: fixed; /* Make the header fixed */
+    top: 0; /* Stick it to the top of the page */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Ensure it's on top of other content */
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
+
+}
+
+.logo img {
+    margin-top: 30px;
+    margin-left: 50px;
+    height: 45px; /* Adjust height of the logo */
+}
+
+.auth-links a {
+    font-size: 18px;
+    margin-top: 20px;
+    margin: 20px 70px 10px -50px;
+    text-decoration: none;
+    color: #333;
+}
+
+/* Search container styles */
+.search-container {
+    position: absolute;
+}
+
+
+.search-container form {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    position: relative; /* This keeps the suggestions under the input */
+    justify-content: center;
+    margin-top: 40px; /* Move the form down to align */
+
+}
+
+
+.search-container input[type="text"] {
+    flex: 1; /* Input will take the remaining space */
+    font-family: 'Abel';
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 25px 0 0 25px; /* Rounded corners on the left */
+    border: 3px solid #ccc;
+    outline: none;
+    width: 400px; /* Set width to 100% for responsiveness */
+    max-width: 100%;
+
+}
+
+.search-container button[type="submit"] {
+    background-color: #dd2630;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 25px 25px 0; /* Rounded corners on the right */
+    height: 45px; /* Same height as input */
+    width: 45px; /* Fixed width for the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.search-container button[type="submit"] img {
+    width: 25px;
+    height: 25px;
+}
+
+/* -------- Category ---------------------- */
+/* Styling the category dropdown */
+.search-container select#category-select {
+    font-family: 'Abel';
+    font-weight: 600;
+    padding: 10px 20px;
+    width: 220px;
+    font-size: 18px;
+    background-color: #ccc;
+    color: #353535;
+    appearance: none; /* Remove default select arrow for custom styling */
+    -webkit-appearance: none; /* For Chrome */
+    -moz-appearance: none; /* For Firefox */
+    margin-left: 0px; /* Adjust spacing */
+    margin-right: 0px;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative; /* Keep it positioned naturally */
+}
+
+
+
+/* Suggestions dropdown styles */
+/* Suggestions dropdown styles */
+.suggestions {
+    flex: 1;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 5px; /* No extra margin */
+    padding: 15px;
+    display: none; /* Hidden by default */
+    top: 92px; /* Distance below input (adjust based on input height) */
+    left: 50%; /* Center the suggestions container relative to the form */
+    transform: translateX(-50%); /* Shift it left by 50% to center-align */
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    min-width: 600px; 
+}
+
+/* Style for each suggestion item */
+.suggestions p {
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+    color: #333;
+    text-align: left;
+}
+
+/* Hover effect for suggestion items */
+.suggestions p:hover {
+    background-color: #dd2630; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+
+
+/* ------------ Product comparison styles ---------------------- */
+h2 {
+    text-align: center;
+    color:#515151;
+    font-weight:bold;
+    font-size: 250%;
+
+}
+
+.product-comparison {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    justify-content: center; /* Center the items */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+}
+
+/* --------- Product card ------- */
+
+.highlight {
+    font-weight: bold;
+    color: #dd2630;
+}
+
+.product-card {
+    position: relative;
+    width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+
+.product-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15;
+    margin-bottom: 40px;
+}
+
+.product-item {
+    margin-bottom: 20px;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;  /* Vertically center the text with the image */
+    gap: 15px;            /* Space between the image and text */
+}
+
+
+.product-thumbnail {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    padding: 2px;  /* Optional: Adds some space inside the image container */
+    border-radius: 5px; /* Optional: Rounds the edges of the image container */
+    margin: 0 auto; 
+}
+
+.product-text {
+    flex-grow: 1;             /* Ensures the text block takes the available space */
+    display: flex;
+    flex-direction: column;   /* Keep text stacked vertically */
+    justify-content: center;  /* Vertically center the text relative to the image */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Product Details Body */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align elements to the left */
+    gap: 10px;
+    margin-bottom: 20px;
+    height: 100%; /* Ensure the height of the container spans the available space */
+}
+
+
+
+/* Scrollable Details */
+.details-scrollable {
+    max-height: 200px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto;  /* Enable vertical scrolling if the content exceeds the height */
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+}
+
+
+/* Store Name Styles */
+.store-name {
+    font-weight:500;
+    font-size: 20px; /* Adjust size as needed */
+    text-align: left; /* Left-align text */
+    width: 100%; /* Make it span the full width */
+    margin-bottom: 10px;
+}
+
+
+/* Product Description Styles */
+.product-desc {
+    font-weight: 500;
+    font-size: 15px;
+    color: #777777;
+    text-align: left; /* Left-align text */
+    width: 100%; /* Make it span the full width */
+    margin-bottom: 10px;
+}
+
+
+/* Price Styles */
+.price {
+    background-color: #dd2630;
+    color: white;
+    padding: 5px 10px;
+    font-size: 23px; /* Adjust size as needed */
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: center; /* Left-align text */
+    width: 100%; /* Make it span the full width */
+}
+
+.product-item {
+    border-bottom: 1px solid #ddd; /* Divider for items */
+    padding: 10px 0; /* Spacing around items */
+    
+}
+
+.product-item:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+
+
+/* Ensure the product card is not affected */
+.product-comparison {
+    margin-top: 50px; /* Add margin so it doesn't get too close to the search bar */
+}
+
+
+/* Container for buttons (view and wishlist) */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+}
+
+/* Footer with Buttons */
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: auto;
+}
+
+.view-button, 
+.add-to-wishlist {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+}
+
+
+/* General tooltip styling */
+.view-button, .add-to-wishlist {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+}
+
+/* Tooltip text styles */
+.tooltip-text {
+    visibility: hidden; /* Hidden by default */
+    width: 120px;
+    background-color: #424242;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 99999; /* Ensure it's above other elements */
+    bottom: 180%; /* Position it above the button */
+    opacity: 0; /* Invisible initially */
+    transition: opacity 0.3s;
+}
+
+/* Arrow on the tooltip pointing upwards */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* Position arrow at the top of the tooltip */
+    left: 50%;
+    margin-left: -5px; /* Center the arrow */
+    border-width: 5px;
+    border-style: solid;
+    border-color: #424242 transparent transparent transparent; /* Upward arrow */
+}
+
+/* Show tooltip on hover */
+.view-button:hover .tooltip-text {
+    font-family: inherit;
+    visibility: visible;
+    opacity: 1; /* Show the tooltip */
+    margin-left: -35px; /* Center the tooltip */
+    z-index: 10001; /* Ensure the tooltip has a higher z-index */
+}
+
+/* Show tooltip on hover */
+.add-to-wishlist:hover .tooltip-text {
+    font-family: "Abel";
+    font-size: 16px;
+    visibility: visible;
+    opacity: 1; /* Show the tooltip */
+    bottom: 200%;
+    margin-left: -70px; /* Center the tooltip */
+    z-index: 99999; /* Ensure the tooltip has a higher z-index */
+}
+
+/* Ensure parent elements have positioning */
+.view-button, .add-to-wishlist {
+    position: relative; /* Needed to position the tooltip correctly */
+}
+
+
+.view-button img {
+    width: 100%;  /* Ensure both SVGs scale to the full size */
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    padding: 0;
+    margin-top: -10px;
+    margin-left: 10px;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+}
+
+
+.add-to-wishlist img {
+
+    width: 100%;  /* Ensure both SVGs scale to the full size */
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    padding: 0;
+    margin-top: -30px;
+    margin-left: -10px;
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+}
+
+
+
+
+.view-button:hover img, 
+.add-to-wishlist:hover img {
+    transform: scale(1.2); /* Optional: slight zoom effect on hover */
+}
+
+
+/* ----------- Wish List ------------ */
+
+/* Wishlist Dropdown Styles */
+.wishlist-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Space between wishlist and user icon */
+    margin-left: 0; /* Reset margin for proper alignment */
+    display: flex; /* Use flexbox to align elements */
+    align-items: center; /* Vertically center the icon */
+}
+
+/* Wishlist Button Styles */
+.wishlist-dropdown .wishlist-btn {
+    width: 35px !important;  
+    height: 35px !important; 
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex; /* Use flexbox to control alignment */
+    align-items: center; /* Center icon vertically */
+    justify-content: center; /* Center icon horizontally */
+    margin-left: -200px; /* Move wishlist to the left */
+    margin-top: 20px;
+}
+
+/* Ensure the icon fits perfectly inside the button */
+#wishlist-btn .wishlist-icon {
+    width: 100%;  /* Ensure the icon takes full width */
+    height: 100%; /* Ensure the icon takes full height */
+    display: block; /* Block element */
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
+#wishlist-count {
+    position: absolute;
+    top: 15px;
+    right: 150px;
+    background-color: rgb(233, 193, 50); /* Custom background */
+    color: #424242;
+    border-radius: 50%;
+    width: 25px;  /* Fixed size for the circle */
+    height: 25px; /* Fixed size for the circle */
+    line-height: 25px; /* Vertically centers the text */
+    font-size: 15px; /* Adjusted font size */
+    font-weight: 600;
+    display: none;
+    text-align: center; /* Horizontally centers the number */
+    box-sizing: border-box;
+}
+
+#wishlist-count.large-number {
+    width: auto;
+    padding: 3px 8px;
+    border-radius: 50px; /* Makes it more oval for larger numbers */
+    font-size: 12px; /* Reduce font size slightly */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wishlist-content {
+    position: absolute;
+    top: 100px;
+    font-family: 'Abel';
+    display: none; /* Hidden by default */
+    right: 0;
+    background-color: #f5f5f5;
+    min-width: 550px; /* Width of the dropdown */
+    max-height: 700px;
+    z-index: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px; /* Adjust padding as needed to move text inside */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid #d7d7d7;
+    width: 100%;
+    overflow: hidden; 
+    /* Enable vertical scrolling */
+
+}
+
+/* Header styling */
+.wishlist-header {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0; /* Ensure there's no gap at the top */
+    padding: 0;
+    background-color: #f5f5f5; /* Adjust header background */
+    font-weight: bold;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for separation */
+}
+
+/* Body styling - this will be scrollable */
+.wishlist-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    max-height: 400px; /* Set a max height to ensure it stays within bounds */
+}
+
+/* Footer styling */
+.wishlist-footer {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    padding: 0px;
+    background-color: #f5f5f5; /* Adjust footer background */
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow at the top of the footer for separation */
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Total price section should be at the top of the footer */
+.total-price-section {
+    background-color: #424242;
+    color: white;
+    font-weight: bolder;
+    border-radius: 0px 0px 5px 5px;
+    height: 32px;
+    max-width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%; /* Ensure it spans the full width */
+    padding-top: 4px;
+    padding-right: 20px;
+}
+
+.wishlist-buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0; /* Reset any margin */
+    padding-top: 0; /* Reset padding */
+}
+
+/* Wishlist buttons container */
+.wishlist-buttons {
+    display: flex;
+    justify-content: space-between; /* Space buttons apart */
+    width: 100%; /* Full width for buttons */
+    margin-top: 15px;
+}
+
+
+/* Individual button styling */
+.wishlist-footer button {
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Styling for buttons */
+#wishlist-footer button {
+    margin: 5px;
+}
+
+#wishlist-items th, #wishlist-items td {
+    padding: 5px;
+    text-align: left;
+}
+
+/* Optional: Styling for the wishlist items table */
+#wishlist-items {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wishlist-content p {
+    font-weight: bold;
+    background-color: #414141;
+    background-size: 30px;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 30px;
+}
+
+.wishlist-content h4 {
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(52, 51, 51);
+    padding: 15px 15px;
+    margin-block-start: 20px;
+    margin-block-end: 10px;
+}
+
+
+/* Wishlist Items - Only the items should scroll */
+#wishlist-items-container {
+    max-height: 300px; /* Set height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling for the items */
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Updated wishlist items */
+#wishlist-items {
+    list-style: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    max-height: 300px; /* Limit height for overflow */
+    overflow-y: auto; /* Enable scrolling if necessary */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Optional: You can adjust the width of the scrollable container if needed */
+.wishlist-content::-webkit-scrollbar {
+    width: 8px; /* Customize scrollbar width */
+}
+
+.wishlist-content::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Customize scrollbar thumb color */
+    border-radius: 10px; /* Rounded scrollbar edges */
+}
+
+.wishlist-content::-webkit-scrollbar-track {
+    background-color: #f5f5f5; /* Scrollbar background color */
+}
+
+#wishlist-items thead th {
+  background-color: #f9f9f9;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+#wishlist-items tbody td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+#wishlist-items tbody tr:last-child td {
+  border-bottom: none; /* Remove border for the last row */
+}
+
+/* Adjusting column width */
+#wishlist-items th:nth-child(1),
+#wishlist-items td:nth-child(1) {
+  width: 10%; /* Image column */
+}
+
+#wishlist-items th:nth-child(2),
+#wishlist-items td:nth-child(2) {
+  width: 20%; /* Store column */
+}
+
+#wishlist-items th:nth-child(3),
+#wishlist-items td:nth-child(3) {
+  width: 30%; /* Product name column */
+}
+
+#wishlist-items th:nth-child(4),
+#wishlist-items td:nth-child(4) {
+  width: 10%; /* Quantity column */
+  text-align: center;
+}
+
+#wishlist-items th:nth-child(5),
+#wishlist-items td:nth-child(5) {
+  width: 15%; /* Price column */
+  text-align: right;
+}
+
+#wishlist-items th:nth-child(6),
+#wishlist-items td:nth-child(6) {
+  width: 15%; /* Actions column */
+  text-align: center;
+}
+
+/* Ensuring images are aligned properly */
+#wishlist-items img {
+  display: block;
+  max-width: 50px;
+  max-height: 50px;
+  margin: 0 auto;
+}
+
+/* Styling buttons inside the wishlist */
+.wishlist-content button {
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.wishlist-content button:hover {
+  background-color: #ddd;
+}
+
+/* Centering the increase, decrease, and remove buttons */
+.wishlist-content td button {
+  margin: 0 5px;
+}
+
+
+/* Style for remove button */
+.remove-from-wishlist {
+    background: none;
+    border: none;
+    color: #dd2630; /* Red color for remove */
+    cursor: pointer;
+}
+
+/* Adjust hover effect for the remove button */
+.remove-from-wishlist:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+#total-price {
+    position: absolute; /* Fix position relative to the wishlist icon */
+    margin-top: 60px;
+    margin-left: -5px; /* Space between the icon and the price */
+    font-size: 15px; /* Adjust as needed */
+    color: #333; /* Adjust color as needed */
+    font-weight: bold; /* Make the text bold */
+    white-space: nowrap; /* Prevent line breaks */
+    display: inline; /* Just use inline to ensure it behaves like regular text */
+}
+
+
+#save-wishlist-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-left: 15px;
+    font-size: 14px;
+    background-color: #424242; /* Customize the color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#goto-wishlist-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 15px;
+    font-size: 14px;
+    background-color: #424242; /* Customize the color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+  
+#save-wishlist-btn:hover, #goto-wishlist-btn:hover {
+    background-color: #7a7a7a; /* Hover color */
+}
+  
+#wishlist-content {
+    text-align: center; /* Optional: Center content */
+}
+  
+#wishlist-content button {
+    margin-top: 10px; /* Add spacing if needed */
+}
+
+.wishlist-actions {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+  }
+  
+@media screen and (max-width: 768px) {
+.wishlist-actions {
+    flex-direction: column; /* Stack buttons on smaller screens */
+}
+}
+
+
+/* ------------- User menu -------------  */
+
+/* Style for the user menu and button */
+.user-menu {
+    position: relative;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically in the center */
+    margin-left: auto; /* Keeps it on the right side of the header */
+    margin-right: 20px; /* Add some spacing from the right edge */
+
+}
+
+/* The button that wraps the user icon */
+.user-icon-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 20px;
+    margin-left: -100px; /* Negative value to move it left */
+    width: 50px; /* Match icon's width */
+    height: 50px; /* Match icon's height */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center; /* Vertically center the icon */
+    justify-content: center; /* Horizontally center the icon */
+}
+
+/* Ensure the icon fits perfectly inside the button */
+.user-icon {
+    width: 70%;  /* 100% of the button's width */
+    height: 70%; /* 100% of the button's height */
+    display: block; /* Ensure it's treated as a block element */
+    border-radius: 50%; /* Make the image circular */
+    border: 3px solid #dd2630; /* Add a solid border (adjust color and thickness) */
+    object-fit: cover; /* Ensure the image maintains aspect ratio and covers the container */
+    margin-top: 10px;
+}
+
+/* ---------------- Drop Down User menu ------------- */
+
+/* Dropdown container */
+.user_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Dropdown content (hidden by default) */
+.user-dropdown-content {
+    font-family: "Abel";
+    font-weight: 600;
+    font-size: 18px;
+    display: none; /* Hidden initially */
+    position: absolute;
+    right: 20px;
+    background-color: #f5f5f5;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 20px; /* Optional: give it a card-like view */
+    overflow: hidden;
+    margin-top: 100px;
+    padding: 0px;
+    border: 1px solid #d7d7d7;
+}
+
+.user-dropdown-content p {
+    background-color: #424242;
+    color: #fff;
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: 0px;
+}
+
+
+/* ----- Line divider -------- */
+.divider {
+    width: 100%; /* Make the line full width */
+    border: none; /* Remove default border */
+    height: 1px; /* Set height for the line */
+    background-color: #ccc; /* Line color */
+    margin: 0; /* Add some margin above and below the line */
+}
+
+
+
+/* Dropdown links */
+.user-dropdown-content a {
+    color: #353535;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Hover effect for dropdown links */
+.user-dropdown-content a:hover {
+    background-color: #dd2630;
+    color: white;
+    text-decoration-color: #ccc;
+}
+
+/* Show the dropdown when the .show class is added */
+.show {
+    display: block;
+}
+
+
+.buy-button, .add-to-wishlist {
+    margin-top: 10px;
+}
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+
+.modal .messages p {
+    color: #dd2630;  /* or any other styling */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+  
+/* Modal content styling for both login and signup */
+.modal-content {
+margin: auto;
+padding: 20px;
+width: 80%;
+max-width: 400px;
+background-color: #ffffff; /* Unified background color */
+border-radius: 20px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Close button styling */
+.close {
+color: #fefefe;
+position: absolute;
+right: 20px; /* Ensures it's aligned on the right */
+top: 15px; /* Top alignment */
+font-size: 28px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: rgb(198, 198, 198);
+text-decoration: none;
+cursor: pointer;
+}
+
+/* Consistent styling for both login and signup forms */
+.form-container {
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+/* Form labels and inputs specifically for the form-container */
+.form-container label {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.form-container input {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+/* Buttons specifically for the form-container */
+.form-container button {
+padding: 10px 20px;
+background-color: #dd2630;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+/* Align messages */
+.messages {
+margin-bottom: 15px;
+color: #dd2630;
+font-weight: bold;
+}
+
+/* Links for navigation between login and signup */
+.form-container p {
+text-align: center;
+}
+
+.form-container a {
+color: #dd2630;
+text-decoration: none;
+}
+
+.form-container a:hover {
+text-decoration: underline;
+}
+
+/* Ensure full width of input and form alignment */
+.form-container form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+
+
+/* signup and login messages */
+
+.messages {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.messages p {
+    margin: 0;
+}
+
+.messages p.error {
+    color: red;  /* Style for error messages */
+    border-color: red;  /* Border color for error */
+}
+
+.messages p.success {
+    color: green;  /* Style for success messages */
+    border-color: green;  /* Border color for success */
+}
+
+
+/* ----------------   Pages ------------------------ */
+
+.pagination {
+    font-family: "Abel";
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin: 20px 0;
+}
+
+.step-links {
+    display: flex;
+    justify-content: center;
+}
+
+.step-links a, .step-links span {
+    padding: 10px 20px;
+    margin: 0 -5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.pagination-icon {
+    width: 30px; /* Default width */
+    height: 30px; /* Default height */
+    transition: transform 0.2s ease; /* Optional: smooth animation when resizing */
+  }
+  
+  .pagination-icon:hover {
+    transform: scale(1.5); /* Optional: slight zoom effect on hover */
+  }
+  
+  .pagination-icon.large {
+    width: 30px; /* Larger version */
+    height: 30px;
+  }
+  
+
+
+  /* ---------------- Footer Styling ---------------- */
+footer {
+    text-align: center;
+    margin-top: 500px;
+    padding: 10px;
+    height: 180px;
+    background-color: #333;
+}
+
+footer p {
+    color: white;
+}
+
