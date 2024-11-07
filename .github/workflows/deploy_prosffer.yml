@@ -20,7 +20,7 @@ jobs:
 
     - name: Deploy to Server
       env:
-        SSH_KEY: ${{ secrets.SSH_KEY_CO }}
+        SSH_KEY_CO: ${{ secrets.SSH_KEY_CO }}
       run: |
         ssh -i $SSH_KEY_CO ubuntu@130.61.14.234 "
           cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project &&
