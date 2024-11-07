@@ -1,0 +1,31 @@
+name: Deploy Prosffer Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Deploy to Server
+      env:
+        SSH_KEY_CO: ${{ secrets.SSH_KEY_CO }}
+      run: |
+        ssh -i $SSH_KEY_CO ubuntu@130.61.14.234 "
+          cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project &&
+          git pull origin main &&
+          /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate &&
+          make prod-install &&
+          sudo supervisorctl restart prosffer_project
+        "
