@@ -11,10 +11,10 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"] # This is where you will add your public "IP Address", "localhost", "domain.com", also below you need to activate the CSRF_TRUSTED_ORIGINS add your "http://ip-public" or "http://domain.com"
 # CSRF_TRUSTED_ORIGINS= [
 #     "*"
-# ]
+# ] 
 
 THIRD_PARTY_APPS = [
     # USER DEFINED APPS
@@ -36,5 +36,5 @@ DATABASES = {
 STATIC_ROOT = str(BASE_DIR /"staticfiles")
 STATICFILES_DIRS = (str(BASE_DIR / "static"),)  
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR / "media")

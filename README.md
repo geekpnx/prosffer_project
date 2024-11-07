@@ -9,7 +9,7 @@ After, you need to go to  **`prosffer_project`** folder.
 - With the command:
 
 ```bash
-cd prosffer
+cd prosffer_project
 ```
 
 ## **STEP 2**
@@ -37,13 +37,13 @@ Install requirements.
 - With the command:
 
 ```bash
-make dev-install
+make prod-install
 ```
 
 
 ## **STEP 4**
 
-Create **`.env`** file
+Create **`.env.prod`** file
 
 - With the command
 
@@ -133,7 +133,7 @@ After **`.env`** file been setup with the required data, you can migrate the dja
 - With the command
 
 ```bash
-make dev-m
+make prod-m
 ```
 
 ## **STEP 9**
@@ -143,16 +143,16 @@ Create superuser with the name **`admin`** (or as you wish) and password **`admi
 - With the command
 
 ```bash
-make dev-super
+make prod-super
 ```
 
 
 ## **STEP 10**
 
-To run the django server by running the command below in terminal.
+To run the django server by running the command below in terminal. (For testing purposes)
 
 ```bash
-make
+make prod-gunicorn
 ```
 
 Check if your Django server is up and running, by going to your browser, and enter **http://127.0.0.1:8000**
@@ -161,21 +161,4 @@ Check if your Django server is up and running, by going to your browser, and ent
 # **Insert Data to Database `prosffer_db`**
 
 
-First you need to run the  `dbshell` from the `prosffer_project` directory *(or the working directory)*
-
-- With the command
-
-```bash
-make db-shell
-```
-
-
-
-```sql
-
-COPY product_product (store, name, description, price, currency, category, image, link, id_tag)
-FROM 'absolute/drinks.csv'
-DELIMITER ','
-CSV HEADER;
-
-```
+Instruction will come 

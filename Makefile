@@ -33,8 +33,6 @@ dev-shell-plus:
 
 #-------------------- Production -------------------
 
-prod-start:
-	python3 manage.py runserver --settings=config.settings.prod
 
 prod-install:
 	pip install -r requirements/prod.txt
@@ -47,6 +45,9 @@ prod-makem:
 
 prod-super:
 	python3 manage.py createsuperuser --settings=config.settings.prod
+
+prod-shell-plus:
+	python3 manage.py shell_plus --settings=config.settings.prod
 
 prod-collectstatic:
 	python3 manage.py collectstatic --settings=config.settings.prod
