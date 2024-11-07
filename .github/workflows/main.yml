@@ -1,0 +1,40 @@
+name: Deploy Prosffer Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Deploy to Server
+      env:
+        SSH_KEY_CO_GIT: ${{ secrets.SSH_KEY_CO_GIT }}
+      run: |
+        # Save the SSH key for GitHub
+        echo "$SSH_KEY_CO_GIT" > /tmp/deploy_key
+        chmod 600 /tmp/deploy_key
+
+        # Start the SSH agent and add the GitHub SSH key
+        eval "$(ssh-agent -s)"
+        ssh-add /tmp/deploy_key
+
+        # Connect to the server and run the deployment steps
+        ssh -o StrictHostKeyChecking=no ubuntu@130.61.14.234 "
+          cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project &&
+          git pull git@github.com:geekpnx/prosffer_project.git main &&
+          source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate &&
+          make prod-install &&
+          sudo supervisorctl restart prosffer_project
+        "
