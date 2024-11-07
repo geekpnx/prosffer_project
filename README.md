@@ -48,9 +48,9 @@ Create **`.env.prod`** file
 - With the command
 
 ```bash
-nano .env
+nano .env.prod
 ```
-Copy and paste texts below inside the file **`.env`**.
+Copy and paste texts below inside the file **`.env.prod`**.
 
 ```bash
 SECRET_KEY=      
@@ -124,11 +124,11 @@ CREATE ROLE prosffer_user WITH LOGIN SUPERUSER 'password123';
 ```
 
 
-And add this information into the **`.env`** file.
+And add this information into the **`.env.prod`** file.
 
 ## **STEP 8**
 
-After **`.env`** file been setup with the required data, you can migrate the django  project `prosffer`.
+After **`.env.prod`** file been setup with the required data, you can migrate the django  project `prosffer`.
 
 - With the command
 
@@ -161,4 +161,4 @@ Check if your Django server is up and running, by going to your browser, and ent
 # **Insert Data to Database `prosffer_db`**
 
 
-Instruction will come 
+Instruction will come soon
