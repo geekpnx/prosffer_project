@@ -163,4 +163,4 @@ Check if your Django server is up and running, by going to your browser, and ent
 # **Insert Data to Database `prosffer_db`**
 
 
-Instruction will come soon
+Instructions coming soon
