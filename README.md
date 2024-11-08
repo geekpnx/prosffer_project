@@ -1,5 +1,7 @@
 # **PROSFFER**
 
+![prosffer](readme/prosffer-quickview.gif)
+
 These steps below is only when you have cloned the repo.
 
 ## **STEP 1**
