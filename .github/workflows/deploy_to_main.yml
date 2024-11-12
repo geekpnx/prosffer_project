@@ -18,29 +18,31 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Deploy to Server
+    - name: Add SSH Key
       env:
-        SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
-        SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
+        SSH_KEY_CO_GIT: ${{ secrets.SSH_KEY_CO_GIT}}
       run: |
-        # Start SSH agent and add the key
+        # Create the SSH directory and write the private key to it
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY_CO_GIT" > ~/.ssh/github_prosffer_key
+        chmod 600 ~/.ssh/github_prosffer_key
+        
+        # Start SSH agent and add the SSH key
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/github_prosffer_key
         
         # Verify the key is added
         ssh-add -l
 
+    - name: Deploy to Server
+      env:
+        SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
+        SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
+      run: |
         # Connect to the server and run deployment steps
         ssh -o StrictHostKeyChecking=no $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
-          # Ensure the SSH key is available and permissions are set
-          chmod 600 ~/.ssh/github_prosffer_key
-
           # Configure Git to use this SSH key explicitly in each Git command
           export GIT_SSH_COMMAND="ssh -i ~/.ssh/github_prosffer_key -o StrictHostKeyChecking=no"
-
-          # Debug: Print environment variables
-          echo "SERVER_USER_CO: $SERVER_USER_CO"
-          echo "SERVER_HOST_CO: $SERVER_HOST_CO"
 
           # Navigate to the project directory
           cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project || exit 1
