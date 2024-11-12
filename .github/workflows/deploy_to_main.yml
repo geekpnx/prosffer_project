@@ -24,11 +24,11 @@ jobs:
         SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
         SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
       run: |
-        # Ensure the .ssh directory exists on the GitHub Actions runner
+        # Ensure the .ssh directory exists and set permissions
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
 
-        # Save the SSH key for GitHub and set strict permissions
+        # Save the SSH key and enforce strict permissions
         echo "$SSH_KEY_CO_GIT" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
@@ -36,34 +36,36 @@ jobs:
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
 
-        # Verify the SSH key is added
+        # Verify the SSH key is added correctly
         ssh-add -l
 
-        # Connect to the server and run the deployment steps
+        # Connect to the server and perform deployment steps
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
           # Ensure the .ssh directory on the server and configure SSH to use the key
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          
+          cp ~/.ssh/id_rsa ~/.ssh/id_rsa_remote
+          chmod 600 ~/.ssh/id_rsa_remote
+
           # Git configuration to use SSH key for GitHub commands
-          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_remote -o StrictHostKeyChecking=no"
 
           # Navigate to the project directory
           cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project || exit 1
-          
+
           # Ensure we are on the main branch and pull the latest changes
           git fetch origin
           git checkout main
           git pull origin main
-          
+
           # Verify the branch and latest commit
           git branch
           git log -1
-          
+
           # Activate virtual environment and install requirements
           source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate 
           make prod-install 
-          
+
           # Restart the application
           sudo supervisorctl restart prosffer_project
         EOF
