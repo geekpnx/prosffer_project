@@ -1,0 +1,69 @@
+name: Deploy Prosffer Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Deploy to Server
+      env:
+        SSH_KEY_CO_GIT: ${{ secrets.SSH_KEY_CO_GIT }}
+        SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
+        SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
+      run: |
+        # Ensure the .ssh directory exists on the GitHub Actions runner
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+
+        # Save the SSH key for GitHub and set permissions
+        echo "$SSH_KEY_CO_GIT" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+        # Start the SSH agent and add the GitHub SSH key
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+
+        # Verify the SSH key is added
+        ssh-add -l
+
+        # Connect to the server and run the deployment steps
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
+          # Ensure the .ssh directory on the server and configure SSH to use the key
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # Git configuration to use SSH key for GitHub commands
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
+
+          # Navigate to the project directory
+          cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project || exit 1
+          
+          # Ensure we are on the main branch and pull the latest changes
+          git fetch origin
+          git checkout main
+          git pull origin main
+          
+          # Verify the branch and latest commit
+          git branch
+          git log -1
+          
+          # Activate virtual environment and install requirements
+          source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate 
+          make prod-install 
+          
+          # Restart the application
+          sudo supervisorctl restart prosffer_project
+        EOF
