@@ -28,7 +28,7 @@ jobs:
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
 
-        # Save the SSH key for GitHub and set permissions
+        # Save the SSH key for GitHub and set strict permissions
         echo "$SSH_KEY_CO_GIT" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
