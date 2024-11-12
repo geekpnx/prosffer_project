@@ -23,21 +23,32 @@ jobs:
         SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
         SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
       run: |
+        # Start SSH agent and add the key
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/github_prosffer_key
+        
+        # Verify the key is added
+        ssh-add -l
+
         # Connect to the server and run deployment steps
         ssh -o StrictHostKeyChecking=no $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
           # Ensure the SSH key is available and permissions are set
           chmod 600 ~/.ssh/github_prosffer_key
 
-          # Configure Git to use this SSH key for GitHub
-          git config --global core.sshCommand "ssh -i ~/.ssh/github_prosffer_key -o StrictHostKeyChecking=no"
+          # Configure Git to use this SSH key explicitly in each Git command
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/github_prosffer_key -o StrictHostKeyChecking=no"
+
+          # Debug: Print environment variables
+          echo "SERVER_USER_CO: $SERVER_USER_CO"
+          echo "SERVER_HOST_CO: $SERVER_HOST_CO"
 
           # Navigate to the project directory
           cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project || exit 1
 
           # Fetch and pull the latest changes
-          git fetch origin
-          git checkout main
-          git pull origin main
+          $GIT_SSH_COMMAND git fetch origin
+          $GIT_SSH_COMMAND git checkout main
+          $GIT_SSH_COMMAND git pull origin main
 
           # Activate virtual environment and install requirements
           source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate 
