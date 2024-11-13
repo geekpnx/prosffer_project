@@ -26,6 +26,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
+      # Verify that the SSH key is loaded correctly
+      - name: Verify SSH Agent Keys
+        run: |
+          ssh-add -l
+
       - name: Deploy to Server
         env:
           SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
@@ -37,6 +42,15 @@ jobs:
             
             # Pull the latest code from the main branch
             git pull origin main
+            
+            # (Optional) Install any new dependencies
+            pip install -r requirements.txt
+
+            # (Optional) Run database migrations for Django projects
+            python manage.py migrate --noinput
+            
+            # (Optional) Collect static files for Django projects
+            python manage.py collectstatic --noinput
 
             # Restart the project service to apply updates
             sudo supervisorctl restart prosffer_project
