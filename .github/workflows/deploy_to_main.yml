@@ -26,15 +26,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      # Verify that the SSH key is loaded correctly
-      - name: Verify SSH Agent Keys
-        run: |
-          ssh-add -l
-
       - name: Deploy to Server
         env:
           SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
           SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
+          # Setting up GIT_SSH_COMMAND to use deploy_key for git commands
+          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
         run: |
           ssh -o StrictHostKeyChecking=no $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
             # Navigate to the project directory
@@ -43,14 +40,11 @@ jobs:
             # Pull the latest code from the main branch
             git pull origin main
             
-            # (Optional) Install any new dependencies
-            pip install -r requirements.txt
+            # Activate virtual environment and install requirements
+            source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate 
 
-            # (Optional) Run database migrations for Django projects
-            python manage.py migrate --noinput
-            
-            # (Optional) Collect static files for Django projects
-            python manage.py collectstatic --noinput
+            # (Optional) Install any new dependencies
+            make prod-install
 
             # Restart the project service to apply updates
             sudo supervisorctl restart prosffer_project
