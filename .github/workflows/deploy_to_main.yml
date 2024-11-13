@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main  # Trigger deployment on push to the main branch
+      - main
 
 jobs:
   deploy:
@@ -16,11 +16,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
 
-      # Clear any previously cached SSH keys in the GitHub runner
       - name: Clear SSH Agent Keys
-        run: ssh-add -D || true  # This ensures no cached key is carried over from previous jobs
+        run: ssh-add -D || true
 
-      # Set up SSH with the deploy key from GitHub secrets
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -30,19 +28,14 @@ jobs:
         env:
           SERVER_USER_CO: ${{ secrets.SERVER_USER_CO }}
           SERVER_HOST_CO: ${{ secrets.SERVER_HOST_CO }}
-          # Setting up GIT_SSH_COMMAND to use deploy_key for git commands
-          GIT_SSH_COMMAND: "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
         run: |
           ssh -o StrictHostKeyChecking=no $SERVER_USER_CO@$SERVER_HOST_CO << 'EOF'
             # Navigate to the project directory
             cd /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project
             
-            # Pull the latest code from the main branch
-            git pull origin main
+            # Set GIT_SSH_COMMAND for git pull to use the correct SSH key
+            GIT_SSH_COMMAND="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" git pull origin main
             
-            # Activate virtual environment and install requirements
-            source /home/ubuntu/Documents/Programming/Projects/FINAL_PROJ/Projects/prosffer_project/.venv/bin/activate 
-
             # (Optional) Install any new dependencies
             make prod-install
 
